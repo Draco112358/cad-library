@@ -1,7 +1,6 @@
 export type {
     TransformationParamDetails,
     TransformationParams,
-    TRANSF_PARAMS_DEFAULTS,
     ComponentEntity,
     CubeEntity,
     SphereEntity, 
@@ -11,4 +10,4 @@ export type {
     TorusEntity,
     ConeEntity
 } from "./componentEntity"
-export {areEquals} from "./componentEntity"
+export {areEquals, TRANSF_PARAMS_DEFAULTS} from "./componentEntity"
