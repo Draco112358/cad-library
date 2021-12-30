@@ -1,5 +1,7 @@
 import { FC, useMemo } from "react";
-import { BufferComponent, CompositeEntity, meshFrom } from "../../..";
+import { meshFrom } from "../../../auxiliaryFunctionsUsingThree/auxiliaryFunctionsUsingThree";
+import { CompositeEntity } from "../../../model/componentEntity/componentEntity";
+import { BufferComponent } from "../bufferComponent/bufferComponent";
 
 
 

@@ -1,6 +1,7 @@
 import { Dispatch } from '@reduxjs/toolkit';
 import { FC } from 'react';
-import { getNewKeys, SphereEntity, TRANSF_PARAMS_DEFAULTS } from '../../..';
+import { SphereEntity, TRANSF_PARAMS_DEFAULTS } from '../../../model/componentEntity/componentEntity';
+import { getNewKeys } from '../cube/cube';
 
 interface SphereProps {
     radius: number,

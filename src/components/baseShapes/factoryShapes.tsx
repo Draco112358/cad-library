@@ -1,5 +1,13 @@
 import React, { FC } from "react"
-import { BufferComponent, BufferEntity, ComponentEntity, Composite, CompositeEntity, Cone, ConeEntity, Cube, CubeEntity, Cylinder, CylinderEntity, Sphere, SphereEntity, Torus, TorusEntity } from "../.."
+import { BufferEntity, ComponentEntity, CompositeEntity, ConeEntity, CubeEntity, CylinderEntity, SphereEntity, TorusEntity } from "../model/componentEntity/componentEntity"
+import { BufferComponent } from "./shapes/bufferComponent/bufferComponent"
+import { Composite } from "./shapes/composite/composite"
+import { Cone } from "./shapes/cone/cone"
+import { Cube } from "./shapes/cube/cube"
+import { Cylinder } from "./shapes/cylinder/cylinder"
+import { Sphere } from "./shapes/sphere/sphere"
+import { Torus } from "./shapes/torus/torus"
+
 
 interface FactoryShapesProps{
     entity: ComponentEntity

@@ -1,7 +1,8 @@
 import { Dispatch } from "@reduxjs/toolkit";
 import { FC, } from "react";
-import { CubeEntity, incrementNumberOfGeneratedKey, TRANSF_PARAMS_DEFAULTS } from "../../..";
 import "@react-three/fiber"
+import { incrementNumberOfGeneratedKey } from "../../../store/canvas/canvasSlice";
+import { CubeEntity, TRANSF_PARAMS_DEFAULTS } from "../../../model/componentEntity/componentEntity";
 
 interface CubeProps {
     color: string,

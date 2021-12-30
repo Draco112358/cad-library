@@ -1,6 +1,7 @@
 import { Dispatch } from "@reduxjs/toolkit";
 import { FC } from "react";
-import {TRANSF_PARAMS_DEFAULTS, getNewKeys, ConeEntity} from "../../.."
+import { ConeEntity, TRANSF_PARAMS_DEFAULTS } from "../../../model/componentEntity/componentEntity";
+import { getNewKeys } from "../cube/cube";
 
 interface ConeProps {
     radius: number,
