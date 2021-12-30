@@ -1,6 +1,6 @@
 import * as THREE from "three"
 import { CSG } from "three-csg-ts"
-import { BufferEntity, ComponentEntity, CompositeEntity, ConeEntity, CubeEntity, CylinderEntity, SphereEntity, TorusEntity, TransformationParams, TRANSF_PARAMS_DEFAULTS } from ".."
+import { BufferEntity, ComponentEntity, CompositeEntity, ConeEntity, CubeEntity, CylinderEntity, SphereEntity, TorusEntity, TransformationParams, TRANSF_PARAMS_DEFAULTS } from "../.."
 
 export const meshWithcomputedGeometryBoundingFrom = (mesh: THREE.Mesh) => {
     let meshCopy = mesh.clone()
