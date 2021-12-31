@@ -1,10 +1,10 @@
 import { Dispatch } from "@reduxjs/toolkit";
 import { getNewKeys } from "../baseShapes/shapes/cube/cube";
 import { BufferEntity, TRANSF_PARAMS_DEFAULTS } from "../model/componentEntity/componentEntity";
-import { addComponent } from "../store/canvas/canvasSlice";
+import { addComponent, importStateCanvas, CanvasState } from "../store/canvas/canvasSlice";
 import {STLLoader} from "three/examples/jsm/loaders/STLLoader";
 
-export const importFrom = (STLFile: File, numberOfGeneratedKey: number, dispatch: Dispatch) => {
+export const importFromCadSTL = (STLFile: File, numberOfGeneratedKey: number, dispatch: Dispatch) => {
     let loader = new STLLoader();
 
     STLFile.arrayBuffer().then((value) => {
@@ -23,5 +23,12 @@ export const importFrom = (STLFile: File, numberOfGeneratedKey: number, dispatch
         }
 
         dispatch(addComponent(entity))
+    })
+}
+
+export const importFromCadProject = (file: File, dispatch: Dispatch) => {
+    file.text().then((value) => {
+        let canvas: CanvasState = JSON.parse(value)
+        dispatch(importStateCanvas(canvas))
     })
 }

@@ -1,1 +1,1 @@
-export {importFrom} from "./importFunctions"
+export {importFromCadSTL, importFromCadProject} from "./importFunctions"
