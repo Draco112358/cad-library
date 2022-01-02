@@ -26,9 +26,14 @@ export const importFromCadSTL = (STLFile: File, numberOfGeneratedKey: number, di
     })
 }
 
-export const importFromCadProject = (file: File, dispatch: Dispatch) => {
+export const importFromCadProject = (file: File, dispatch: Dispatch, action: (params: importActionParamsObject) => any , actionParamsObject: importActionParamsObject) => {
     file.text().then((value) => {
-        let canvas: CanvasState = JSON.parse(value)
-        dispatch(importStateCanvas(canvas))
+        actionParamsObject.canvas = JSON.parse(value)
+        dispatch(action(actionParamsObject))
     })
+}
+
+export type importActionParamsObject = {
+    canvas: CanvasState,
+    id: string | undefined
 }
