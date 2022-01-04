@@ -4,6 +4,7 @@ import { BufferEntity, TRANSF_PARAMS_DEFAULTS } from "../model/componentEntity/c
 import { addComponent, importStateCanvas, CanvasState } from "../store/canvas/canvasSlice";
 import {STLLoader} from "three/examples/jsm/loaders/STLLoader";
 
+//TODO: change importFromCadSTL to make it working in any case, not only for the CAD.
 export const importFromCadSTL = (STLFile: File, numberOfGeneratedKey: number, dispatch: Dispatch) => {
     let loader = new STLLoader();
 
@@ -26,14 +27,14 @@ export const importFromCadSTL = (STLFile: File, numberOfGeneratedKey: number, di
     })
 }
 
-export const importFromCadProject = (file: File, dispatch: Dispatch, action: (params: importActionParamsObject) => any , actionParamsObject: importActionParamsObject) => {
+export const importFromCadProject = (file: File, dispatch: Dispatch, action: (params: ImportActionParamsObject) => any , actionParamsObject: ImportActionParamsObject) => {
     file.text().then((value) => {
         actionParamsObject.canvas = JSON.parse(value)
         dispatch(action(actionParamsObject))
     })
 }
 
-export type importActionParamsObject = {
+export type ImportActionParamsObject = {
     canvas: CanvasState,
     id: string | undefined
 }

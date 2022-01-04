@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { StateWithHistory } from 'redux-undo';
 import { ComponentEntity, TransformationParams } from '../..';
-import { importActionParamsObject } from '../../importFunctions/importFunctions';
+import { ImportActionParamsObject } from '../../importFunctions/importFunctions';
 
 export type CanvasState = {
     components: ComponentEntity[],
@@ -57,7 +57,7 @@ export const CanvasSlice = createSlice({
             let component = findComponentByKey(state.components, action.payload.key);
             component.name = action.payload.name
         },
-        importStateCanvas(state: CanvasState, action: PayloadAction<importActionParamsObject>) {
+        importStateCanvas(state: CanvasState, action: PayloadAction<ImportActionParamsObject>) {
             setLastActionType(state, action.type)
             state.components = state.components.concat(action.payload.canvas.components)
              if(state.numberOfGeneratedKey < action.payload.canvas.numberOfGeneratedKey) {state.numberOfGeneratedKey = action.payload.canvas.numberOfGeneratedKey}

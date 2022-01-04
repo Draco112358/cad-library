@@ -1,2 +1,3 @@
-export {importFromCadSTL, importFromCadProject} from "./importFunctions"
-export type {importActionParamsObject} from "./importFunctions"
+export {importFromCadSTL} from "./importFunctions"
+export type {ImportActionParamsObject} from "./importFunctions"
+export {ImportCadProjectButton} from "./importCadProjectButton"
