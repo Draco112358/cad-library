@@ -18,11 +18,12 @@ export const FactoryShapes: FC<FactoryShapesProps> = ({entity}) => {
         case "CUBE":
             let cubeEntity = entity as CubeEntity
             return <Cube color={cubeEntity.color} width={cubeEntity.width} height={cubeEntity.height}
-                         depth={cubeEntity.depth}/>
+                         depth={cubeEntity.depth} widthSegments={cubeEntity.widthSegments} heigthSegments={cubeEntity.heigthSegments} depthSegments={cubeEntity.depthSegments}/>
         case "SPHERE":
             let sphereEntity = entity as SphereEntity
             return <Sphere color={sphereEntity.color} heightSegments={sphereEntity.heightSegments}
-                           widthSegments={sphereEntity.widthSegments} radius={sphereEntity.radius}/>
+                           widthSegments={sphereEntity.widthSegments} radius={sphereEntity.radius} 
+                           phiStart={sphereEntity.phiStart} phiLength={sphereEntity.phiLength} thetaStart={sphereEntity.thetaStart} thetaLength={sphereEntity.thetaLength}/>
         case "BUFFER":
             let bufferEntity = entity as BufferEntity
             return <BufferComponent positionVertices={bufferEntity.positionVertices} normalVertices={bufferEntity.normalVertices} color={bufferEntity.color}/>

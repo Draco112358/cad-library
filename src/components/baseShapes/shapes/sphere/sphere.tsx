@@ -7,7 +7,11 @@ interface SphereProps {
     radius: number,
     widthSegments: number,
     heightSegments: number,
-    color: string
+    color: string,
+    phiStart?: number,
+    phiLength?: number,
+    thetaStart?: number,
+    thetaLength?: number
 }
 
 export function getDefaultSphere(numberOfGeneratedKey: number, dispatch: Dispatch) {
@@ -20,6 +24,10 @@ export function getDefaultSphere(numberOfGeneratedKey: number, dispatch: Dispatc
         radius: 1,
         widthSegments: 20,
         heightSegments: 20,
+        phiStart: 0,
+        thetaStart: 0,
+        phiLength: Math.PI*2,
+        thetaLength: Math.PI,
         color: getComputedStyle(document.documentElement).getPropertyValue('--sphereColor').replace(' ', ''),
         previousTransformationParams: TRANSF_PARAMS_DEFAULTS
 

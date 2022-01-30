@@ -37,14 +37,21 @@ export type ComponentEntity = {
 export type CubeEntity = {
     width: number,
     depth: number,
-    height: number
+    height: number,
+    widthSegments?: number,
+    heigthSegments?: number,
+    depthSegments?: number
 } & ComponentEntity
 
 
 export type SphereEntity = {
     radius: number,
     widthSegments: number,
-    heightSegments: number
+    heightSegments: number,
+    phiStart?: number,
+    phiLength?: number,
+    thetaStart?: number,
+    thetaLength?: number
 } & ComponentEntity
 
 export type CompositeEntity = {
@@ -73,7 +80,7 @@ export type TorusEntity = {
     tubeRadius: number,
     radialSegments?: number,
     tubularSegments?: number,
-    centralAngle?: number
+    centralAngle?: number,
 } & ComponentEntity
 
 export type ConeEntity = {

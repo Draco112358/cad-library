@@ -47,10 +47,10 @@ const geometryFrom = (entity: ComponentEntity) => {
     switch (entity.type) {
         case "CUBE":
             let cubeEntity = entity as CubeEntity
-            return new THREE.BoxGeometry(cubeEntity.width, cubeEntity.height, cubeEntity.depth)
+            return new THREE.BoxGeometry(cubeEntity.width, cubeEntity.height, cubeEntity.depth, cubeEntity.widthSegments, cubeEntity.heigthSegments, cubeEntity.depthSegments)
         case "SPHERE":
             let sphereEntity = entity as SphereEntity
-            return new THREE.SphereGeometry(sphereEntity.radius, sphereEntity.widthSegments, sphereEntity.heightSegments)
+            return new THREE.SphereGeometry(sphereEntity.radius, sphereEntity.widthSegments, sphereEntity.heightSegments, sphereEntity.phiStart, sphereEntity.phiLength, sphereEntity.thetaStart, sphereEntity.thetaLength)
         case "BUFFER":
             let bufferEntity = entity as BufferEntity
             let geometry = new THREE.BufferGeometry()
@@ -101,16 +101,16 @@ export const thereIsCollisionBetweenMeshes = (firstMesh: THREE.Mesh, secondMesh:
 
 export const getObjectsFromSceneByType = (scene: THREE.Scene, type: string) => scene.children.filter(obj => obj.type === type)
 
-export const meshesCollidingWithTargetMeshBasedOnBoundingBox = (targetMesh: THREE.Mesh, meshesToCheckCollisionWith: THREE.Mesh[]) : THREE.Mesh[] => {
-        return meshesToCheckCollisionWith
+export const meshesCollidingWithTargetMeshBasedOnBoundingBox = (targetMesh: THREE.Mesh, meshesToCheckCollisionWith: THREE.Mesh[]): THREE.Mesh[] => {
+    return meshesToCheckCollisionWith
         .reduce((results: THREE.Mesh[], mesh) => {
             (thereIsCollisionBetweenMeshes(targetMesh, mesh)) && results.push(mesh)
             return results
-       }, [])
+        }, [])
 }
 
 
-export const meshesCollidingWithTargetMesh = (targetMesh: THREE.Mesh, meshesToCheckCollisionWith: THREE.Mesh[]) : THREE.Mesh[] => {
+export const meshesCollidingWithTargetMesh = (targetMesh: THREE.Mesh, meshesToCheckCollisionWith: THREE.Mesh[]): THREE.Mesh[] => {
     let meshesToCheckCopy = [...meshesToCheckCollisionWith]
     let directionVector = new THREE.Vector3()
     let collisions: THREE.Mesh[] = [];

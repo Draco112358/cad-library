@@ -25,7 +25,11 @@ export function getDefaultCone(numberOfGeneratedKey: number, dispatch: Dispatch)
         color: getComputedStyle(document.documentElement).getPropertyValue('--coneColor').replace(' ', ''),
         previousTransformationParams: TRANSF_PARAMS_DEFAULTS,
         radius: 1,
-        radialSegments: 20
+        radialSegments: 20,
+        heightSegments: 1,
+        openEnded: false,
+        thetaLength: Math.PI*2,
+        thetaStart: 0
     }
     return component
 }

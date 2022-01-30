@@ -27,7 +27,11 @@ export function getDefaultCylinder(numberOfGeneratedKey: number, dispatch: Dispa
         previousTransformationParams: TRANSF_PARAMS_DEFAULTS,
         topRadius: 1,
         bottomRadius: 1,
-        radialSegments: 20
+        radialSegments: 20,
+        heightSegments: 1,
+        openEnded: false,
+        thetaStart: 0,
+        thetaLength: Math.PI*2
     }
     return component
 }

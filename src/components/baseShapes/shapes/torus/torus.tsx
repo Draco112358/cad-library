@@ -8,7 +8,7 @@ interface TorusProps {
     tubeRadius: number,
     radialSegments?: number,
     tubularSegments?: number,
-    centralAngle?: number, 
+    centralAngle?: number,
     color: string
 }
 
@@ -23,7 +23,9 @@ export function getDefaultTorus(numberOfGeneratedKey: number, dispatch: Dispatch
         previousTransformationParams: TRANSF_PARAMS_DEFAULTS,
         tubularSegments: 20,
         torusRadius: 2,
-        tubeRadius: 0.4
+        tubeRadius: 0.4,
+        radialSegments: 8,
+        centralAngle: Math.PI*2
     }
     return component
 }

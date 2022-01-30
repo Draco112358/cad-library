@@ -8,7 +8,10 @@ interface CubeProps {
     color: string,
     width: number,
     height: number,
-    depth: number
+    depth: number,
+    widthSegments?: number,
+    heigthSegments?: number,
+    depthSegments?: number
 }
 
 export function getNewKeys(numberOfGeneratedKey: number, dispatch: Dispatch, numberOfKeyToGenerate = 1) {
@@ -32,6 +35,9 @@ export function getDefaultCube(numberOfGeneratedKey: number, dispatch: Dispatch)
         width: 1,
         depth: 1,
         height: 1,
+        depthSegments: 1,
+        heigthSegments: 1,
+        widthSegments: 1,
         color: getComputedStyle(document.documentElement).getPropertyValue('--cubeColor').replace(' ', '') ,
         previousTransformationParams: TRANSF_PARAMS_DEFAULTS
     }
