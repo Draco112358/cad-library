@@ -4,6 +4,7 @@ export {
     addComponent,
     removeComponent,
     updateTransformationParams,
+    updateCubeGeometryParams,
     selectComponent,
     incrementNumberOfGeneratedKey,
     updateColor, 

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { StateWithHistory } from 'redux-undo';
-import { ComponentEntity, TransformationParams } from '../..';
+import { ComponentEntity, CubeEntity, TransformationParams } from '../..';
 import { ImportActionParamsObject } from '../../importFunctions/importFunctions';
 
 export type CanvasState = {
@@ -39,6 +39,13 @@ export const CanvasSlice = createSlice({
             let selectedComponent = findComponentByKey(state.components, state.selectedComponentKey)
             selectedComponent.previousTransformationParams = selectedComponent.transformationParams
             selectedComponent.transformationParams = action.payload
+        },
+        updateCubeGeometryParams(state: CanvasState, action: PayloadAction<{width: number, heigth: number, depth: number}>){
+            setLastActionType(state, action.type)
+            let selectedComponent = findComponentByKey(state.components, state.selectedComponentKey);
+            (selectedComponent as CubeEntity).width = action.payload.width;
+            (selectedComponent as CubeEntity).height = action.payload.heigth;
+            (selectedComponent as CubeEntity).depth = action.payload.depth
         },
         selectComponent(state: CanvasState, action: PayloadAction<number>) {
             setLastActionType(state, action.type)
@@ -98,7 +105,7 @@ export const CanvasSlice = createSlice({
 
 export const {
     //qui vanno inserite tutte le azioni che vogliamo esporatare
-    addComponent, removeComponent, updateTransformationParams, selectComponent, incrementNumberOfGeneratedKey,
+    addComponent, removeComponent, updateTransformationParams, updateCubeGeometryParams, selectComponent, incrementNumberOfGeneratedKey,
     updateColor, updateName, importStateCanvas, subtraction, union, intersection, resetState
 } = CanvasSlice.actions
 
