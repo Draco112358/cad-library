@@ -1,6 +1,6 @@
 import * as THREE from "three"
 import { CSG } from "three-csg-ts"
-import { BufferEntity, ComponentEntity, CompositeEntity, ConeEntity, CubeEntity, CylinderEntity, SphereEntity, TorusEntity, TransformationParams, TRANSF_PARAMS_DEFAULTS } from "../model/componentEntity/componentEntity"
+import { BufferGeometryAttributes, ComponentEntity, CompositeEntity, ConeGeometryAttributes, CubeGeometryAttributes, CylinderGeometryAttributes, SphereGeometryAttributes, TorusGeometryAttributes, TransformationParams, TRANSF_PARAMS_DEFAULTS } from "../model/componentEntity/componentEntity"
 
 
 export const meshWithcomputedGeometryBoundingFrom = (mesh: THREE.Mesh) => {
@@ -46,29 +46,32 @@ const materialPhongFrom = (entity: ComponentEntity) => {
 const geometryFrom = (entity: ComponentEntity) => {
     switch (entity.type) {
         case "CUBE":
-            let cubeEntity = entity as CubeEntity
-            return new THREE.BoxGeometry(cubeEntity.width, cubeEntity.height, cubeEntity.depth, cubeEntity.widthSegments, cubeEntity.heigthSegments, cubeEntity.depthSegments)
+            let cubeGeometryAttributes = entity.geometryAttributes as CubeGeometryAttributes
+            return new THREE.BoxGeometry(cubeGeometryAttributes.width, cubeGeometryAttributes.height, cubeGeometryAttributes.depth, cubeGeometryAttributes.widthSegments, cubeGeometryAttributes.heigthSegments, cubeGeometryAttributes.depthSegments)
         case "SPHERE":
-            let sphereEntity = entity as SphereEntity
-            return new THREE.SphereGeometry(sphereEntity.radius, sphereEntity.widthSegments, sphereEntity.heightSegments, sphereEntity.phiStart, sphereEntity.phiLength, sphereEntity.thetaStart, sphereEntity.thetaLength)
+            let sphereGeometryAttributes = entity.geometryAttributes as SphereGeometryAttributes
+            return new THREE.SphereGeometry(sphereGeometryAttributes.radius, sphereGeometryAttributes.widthSegments,
+                sphereGeometryAttributes.heightSegments, sphereGeometryAttributes.phiStart, sphereGeometryAttributes.phiLength,
+                sphereGeometryAttributes.thetaStart, sphereGeometryAttributes.thetaLength)
         case "BUFFER":
-            let bufferEntity = entity as BufferEntity
+            let bufferGeometryAttributes = entity.geometryAttributes as BufferGeometryAttributes
             let geometry = new THREE.BufferGeometry()
-            geometry.setAttribute('position', new THREE.BufferAttribute(bufferEntity.positionVertices, 3))
-            geometry.setAttribute('normal', new THREE.BufferAttribute(bufferEntity.normalVertices, 3))
+            geometry.setAttribute('position', new THREE.BufferAttribute(bufferGeometryAttributes.positionVertices, 3))
+            geometry.setAttribute('normal', new THREE.BufferAttribute(bufferGeometryAttributes.normalVertices, 3))
             return geometry
         case "CYLINDER":
-            let cylinderEntity = entity as CylinderEntity
-            return new THREE.CylinderGeometry(cylinderEntity.topRadius, cylinderEntity.bottomRadius, cylinderEntity.height, cylinderEntity.radialSegments,
-                cylinderEntity.heightSegments, cylinderEntity.openEnded, cylinderEntity.thetaStart, cylinderEntity.thetaLength)
+            let cylinderGeometryAttributes = entity.geometryAttributes as CylinderGeometryAttributes
+            return new THREE.CylinderGeometry(cylinderGeometryAttributes.topRadius, cylinderGeometryAttributes.bottomRadius, cylinderGeometryAttributes.height, 
+                cylinderGeometryAttributes.radialSegments, cylinderGeometryAttributes.heightSegments, cylinderGeometryAttributes.openEnded, 
+                cylinderGeometryAttributes.thetaStart, cylinderGeometryAttributes.thetaLength)
         case "TORUS":
-            let torusEntity = entity as TorusEntity
-            return new THREE.TorusGeometry(torusEntity.torusRadius, torusEntity.tubeRadius,
-                torusEntity.radialSegments, torusEntity.tubularSegments, torusEntity.centralAngle)
+            let torusGeometryAttributes = entity.geometryAttributes as TorusGeometryAttributes
+            return new THREE.TorusGeometry(torusGeometryAttributes.torusRadius, torusGeometryAttributes.tubeRadius,
+                torusGeometryAttributes.radialSegments, torusGeometryAttributes.tubularSegments, torusGeometryAttributes.centralAngle)
         case "CONE":
-            let coneEntity = entity as ConeEntity
-            return new THREE.ConeGeometry(coneEntity.radius, coneEntity.height, coneEntity.radialSegments,
-                coneEntity.heightSegments, coneEntity.openEnded, coneEntity.thetaStart, coneEntity.thetaLength)
+            let coneGeometryAttributes = entity.geometryAttributes as ConeGeometryAttributes
+            return new THREE.ConeGeometry(coneGeometryAttributes.radius, coneGeometryAttributes.height, coneGeometryAttributes.radialSegments,
+                coneGeometryAttributes.heightSegments, coneGeometryAttributes.openEnded, coneGeometryAttributes.thetaStart, coneGeometryAttributes.thetaLength)
         default:
             let compositeEntity = entity as CompositeEntity
             let [elementA, elementB] = [meshFrom(compositeEntity.baseElements.elementA), meshFrom(compositeEntity.baseElements.elementB)]

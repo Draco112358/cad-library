@@ -1,5 +1,5 @@
 import React, { FC } from "react"
-import { BufferEntity, ComponentEntity, CompositeEntity, ConeEntity, CubeEntity, CylinderEntity, SphereEntity, TorusEntity } from "../model/componentEntity/componentEntity"
+import { BufferGeometryAttributes, ComponentEntity, CompositeEntity, ConeGeometryAttributes, CubeGeometryAttributes, CylinderGeometryAttributes, SphereGeometryAttributes, TorusGeometryAttributes } from "../model/componentEntity/componentEntity"
 import { BufferComponent } from "./shapes/bufferComponent/bufferComponent"
 import { Composite } from "./shapes/composite/composite"
 import { Cone } from "./shapes/cone/cone"
@@ -16,38 +16,38 @@ interface FactoryShapesProps{
 export const FactoryShapes: FC<FactoryShapesProps> = ({entity}) => {
     switch (entity.type) {
         case "CUBE":
-            let cubeEntity = entity as CubeEntity
-            return <Cube color={cubeEntity.color} width={cubeEntity.width} height={cubeEntity.height}
-                         depth={cubeEntity.depth} widthSegments={cubeEntity.widthSegments} heigthSegments={cubeEntity.heigthSegments} depthSegments={cubeEntity.depthSegments}/>
+            let cubeGeometryAttributes = entity.geometryAttributes as CubeGeometryAttributes
+            return <Cube color={entity.color} width={cubeGeometryAttributes.width} height={cubeGeometryAttributes.height}
+                         depth={cubeGeometryAttributes.depth} widthSegments={cubeGeometryAttributes.widthSegments} heigthSegments={cubeGeometryAttributes.heigthSegments} depthSegments={cubeGeometryAttributes.depthSegments}/>
         case "SPHERE":
-            let sphereEntity = entity as SphereEntity
-            return <Sphere color={sphereEntity.color} heightSegments={sphereEntity.heightSegments}
-                           widthSegments={sphereEntity.widthSegments} radius={sphereEntity.radius} 
-                           phiStart={sphereEntity.phiStart} phiLength={sphereEntity.phiLength} thetaStart={sphereEntity.thetaStart} thetaLength={sphereEntity.thetaLength}/>
+            let sphereGeometryAttributes = entity.geometryAttributes as SphereGeometryAttributes
+            return <Sphere color={entity.color} heightSegments={sphereGeometryAttributes.heightSegments}
+                           widthSegments={sphereGeometryAttributes.widthSegments} radius={sphereGeometryAttributes.radius} 
+                           phiStart={sphereGeometryAttributes.phiStart} phiLength={sphereGeometryAttributes.phiLength} thetaStart={sphereGeometryAttributes.thetaStart} thetaLength={sphereGeometryAttributes.thetaLength}/>
         case "BUFFER":
-            let bufferEntity = entity as BufferEntity
-            return <BufferComponent positionVertices={bufferEntity.positionVertices} normalVertices={bufferEntity.normalVertices} color={bufferEntity.color}/>
+            let bufferGeometryAttributes = entity.geometryAttributes as BufferGeometryAttributes
+            return <BufferComponent positionVertices={bufferGeometryAttributes.positionVertices} normalVertices={bufferGeometryAttributes.normalVertices} color={entity.color}/>
         case "CYLINDER":
-            let cylinderEntity = entity as CylinderEntity
-            return <Cylinder topRadius={cylinderEntity.topRadius} bottomRadius={cylinderEntity.bottomRadius}
-                             height={cylinderEntity.height}
-                             color={cylinderEntity.color} heightSegments={cylinderEntity.heightSegments}
-                             radialSegments={cylinderEntity.radialSegments}
-                             thetaStart={cylinderEntity.thetaStart} thetaLength={cylinderEntity.thetaLength}
-                             openEnded={cylinderEntity.openEnded}/>
+            let cylinderGeometryAttributes = entity.geometryAttributes as CylinderGeometryAttributes
+            return <Cylinder topRadius={cylinderGeometryAttributes.topRadius} bottomRadius={cylinderGeometryAttributes.bottomRadius}
+                             height={cylinderGeometryAttributes.height}
+                             color={entity.color} heightSegments={cylinderGeometryAttributes.heightSegments}
+                             radialSegments={cylinderGeometryAttributes.radialSegments}
+                             thetaStart={cylinderGeometryAttributes.thetaStart} thetaLength={cylinderGeometryAttributes.thetaLength}
+                             openEnded={cylinderGeometryAttributes.openEnded}/>
         case "TORUS":
-            let torusEntity = entity as TorusEntity
-            return <Torus color={torusEntity.color} torusRadius={torusEntity.torusRadius}
-                          tubeRadius={torusEntity.tubeRadius}
-                          centralAngle={torusEntity.centralAngle} radialSegments={torusEntity.radialSegments}
-                          tubularSegments={torusEntity.tubularSegments}/>
+            let torusGeometryAttributes = entity.geometryAttributes as TorusGeometryAttributes
+            return <Torus color={entity.color} torusRadius={torusGeometryAttributes.torusRadius}
+                          tubeRadius={torusGeometryAttributes.tubeRadius}
+                          centralAngle={torusGeometryAttributes.centralAngle} radialSegments={torusGeometryAttributes.radialSegments}
+                          tubularSegments={torusGeometryAttributes.tubularSegments}/>
         case "CONE":
-            let coneEntity = entity as ConeEntity
-            return <Cone radius={coneEntity.radius} height={coneEntity.height}
-                         color={coneEntity.color} heightSegments={coneEntity.heightSegments}
-                         radialSegments={coneEntity.radialSegments}
-                         thetaStart={coneEntity.thetaStart} thetaLength={coneEntity.thetaLength}
-                         openEnded={coneEntity.openEnded}/>
+            let coneGeometryAttributes = entity.geometryAttributes as ConeGeometryAttributes
+            return <Cone radius={coneGeometryAttributes.radius} height={coneGeometryAttributes.height}
+                         color={entity.color} heightSegments={coneGeometryAttributes.heightSegments}
+                         radialSegments={coneGeometryAttributes.radialSegments}
+                         thetaStart={coneGeometryAttributes.thetaStart} thetaLength={coneGeometryAttributes.thetaLength}
+                         openEnded={coneGeometryAttributes.openEnded}/>
         default:
             return <Composite entity={entity as CompositeEntity}/>
 

@@ -31,20 +31,23 @@ export type ComponentEntity = {
     transformationParams: TransformationParams
     previousTransformationParams: TransformationParams
     color: string
-    keyComponent: number
+    keyComponent: number, 
+    geometryAttributes: GeometryAttributes
 }
 
-export type CubeEntity = {
+export type GeometryAttributes = {}
+
+export type CubeGeometryAttributes = {
     width: number,
     depth: number,
     height: number,
     widthSegments?: number,
     heigthSegments?: number,
     depthSegments?: number
-} & ComponentEntity
+} & GeometryAttributes
 
 
-export type SphereEntity = {
+export type SphereGeometryAttributes = {
     radius: number,
     widthSegments: number,
     heightSegments: number,
@@ -52,19 +55,19 @@ export type SphereEntity = {
     phiLength?: number,
     thetaStart?: number,
     thetaLength?: number
-} & ComponentEntity
+} & GeometryAttributes
 
 export type CompositeEntity = {
     baseElements: { elementA: ComponentEntity, elementB: ComponentEntity }
 } & ComponentEntity
 
-export type BufferEntity = {
+export type BufferGeometryAttributes = {
     positionVertices: Float32Array
     normalVertices: Float32Array
     uvVertices: Float32Array | undefined
-} & ComponentEntity
+} & GeometryAttributes
 
-export type CylinderEntity = {
+export type CylinderGeometryAttributes = {
     topRadius: number,
     bottomRadius: number,
     height: number,
@@ -73,17 +76,17 @@ export type CylinderEntity = {
     openEnded?: boolean,
     thetaLength?: number,
     thetaStart?: number
-} & ComponentEntity
+} & GeometryAttributes
 
-export type TorusEntity = {
+export type TorusGeometryAttributes = {
     torusRadius: number,
     tubeRadius: number,
     radialSegments?: number,
     tubularSegments?: number,
     centralAngle?: number,
-} & ComponentEntity
+} & GeometryAttributes
 
-export type ConeEntity = {
+export type ConeGeometryAttributes = {
     radius: number,
     height: number,
     radialSegments?: number,
@@ -91,4 +94,4 @@ export type ConeEntity = {
     openEnded?: boolean,
     thetaLength?: number,
     thetaStart?: number
-} & ComponentEntity
+} & GeometryAttributes

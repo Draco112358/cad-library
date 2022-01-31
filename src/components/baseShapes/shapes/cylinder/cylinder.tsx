@@ -1,6 +1,6 @@
 import { Dispatch } from "@reduxjs/toolkit";
 import { FC } from "react";
-import { CylinderEntity, TRANSF_PARAMS_DEFAULTS } from "../../../model/componentEntity/componentEntity";
+import { ComponentEntity, CylinderGeometryAttributes, TRANSF_PARAMS_DEFAULTS } from "../../../model/componentEntity/componentEntity";
 import { getNewKeys } from "../cube/cube";
 
 interface CylinderProps {
@@ -16,29 +16,31 @@ interface CylinderProps {
 }
 
 export function getDefaultCylinder(numberOfGeneratedKey: number, dispatch: Dispatch) {
-    const component: CylinderEntity = {
+    const component: ComponentEntity = {
         type: 'CYLINDER',
         name: 'CYLINDER',
         keyComponent: getNewKeys(numberOfGeneratedKey, dispatch)[0],
         orbitEnabled: true,
         transformationParams: TRANSF_PARAMS_DEFAULTS,
-        height: 1,
         color: getComputedStyle(document.documentElement).getPropertyValue('--cylinderColor').replace(' ', ''),
         previousTransformationParams: TRANSF_PARAMS_DEFAULTS,
-        topRadius: 1,
-        bottomRadius: 1,
-        radialSegments: 20,
-        heightSegments: 1,
-        openEnded: false,
-        thetaStart: 0,
-        thetaLength: Math.PI*2
+        geometryAttributes: {
+            height: 1,
+            topRadius: 1,
+            bottomRadius: 1,
+            radialSegments: 20,
+            heightSegments: 1,
+            openEnded: false,
+            thetaStart: 0,
+            thetaLength: Math.PI * 2
+        } as CylinderGeometryAttributes
     }
     return component
 }
 
 
 export const Cylinder: FC<CylinderProps> = (
-    { topRadius, bottomRadius, height, radialSegments, heightSegments, openEnded, thetaLength, thetaStart, color}
+    { topRadius, bottomRadius, height, radialSegments, heightSegments, openEnded, thetaLength, thetaStart, color }
 ) => {
 
     return (

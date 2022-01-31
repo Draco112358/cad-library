@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { StateWithHistory } from 'redux-undo';
-import { ComponentEntity, CubeEntity, SphereEntity, TransformationParams } from '../..';
+import { ComponentEntity, GeometryAttributes, TransformationParams } from '../..';
 import { ImportActionParamsObject } from '../../importFunctions/importFunctions';
 
 export type CanvasState = {
@@ -40,26 +40,10 @@ export const CanvasSlice = createSlice({
             selectedComponent.previousTransformationParams = selectedComponent.transformationParams
             selectedComponent.transformationParams = action.payload
         },
-        updateCubeGeometryParams(state: CanvasState, action: PayloadAction<{width: number, heigth: number, depth: number, widthSegments: number, heigthSegments: number, depthSegments: number}>){
+        updateEntityGeometryParams(state: CanvasState, action: PayloadAction<GeometryAttributes>){
             setLastActionType(state, action.type)
-            let selectedComponent = findComponentByKey(state.components, state.selectedComponentKey);
-            (selectedComponent as CubeEntity).width = action.payload.width;
-            (selectedComponent as CubeEntity).height = action.payload.heigth;
-            (selectedComponent as CubeEntity).depth = action.payload.depth;
-            (selectedComponent as CubeEntity).widthSegments = action.payload.widthSegments;
-            (selectedComponent as CubeEntity).heigthSegments = action.payload.heigthSegments;
-            (selectedComponent as CubeEntity).depthSegments = action.payload.depthSegments;
-        },
-        updateSphereGeometryParams(state: CanvasState, action: PayloadAction<{radius: number, heigthSegments: number, widthSegments: number, phiLength: number, phiStart: number, thetaStart: number, thetaLength: number}>){
-            setLastActionType(state, action.type)
-            let selectedComponent = findComponentByKey(state.components, state.selectedComponentKey);
-            (selectedComponent as SphereEntity).radius = action.payload.radius;
-            (selectedComponent as SphereEntity).heightSegments = action.payload.heigthSegments;
-            (selectedComponent as SphereEntity).widthSegments = action.payload.widthSegments;
-            (selectedComponent as SphereEntity).phiLength = action.payload.phiLength;
-            (selectedComponent as SphereEntity).phiStart = action.payload.phiStart;
-            (selectedComponent as SphereEntity).thetaStart = action.payload.thetaStart;
-            (selectedComponent as SphereEntity).thetaLength = action.payload.thetaLength;
+            let selectedComponent = findComponentByKey(state.components, state.selectedComponentKey)
+            selectedComponent.geometryAttributes = action.payload
         },
         selectComponent(state: CanvasState, action: PayloadAction<number>) {
             setLastActionType(state, action.type)
@@ -119,7 +103,7 @@ export const CanvasSlice = createSlice({
 
 export const {
     //qui vanno inserite tutte le azioni che vogliamo esporatare
-    addComponent, removeComponent, updateTransformationParams, updateCubeGeometryParams, updateSphereGeometryParams, selectComponent, incrementNumberOfGeneratedKey,
+    addComponent, removeComponent, updateTransformationParams, updateEntityGeometryParams, selectComponent, incrementNumberOfGeneratedKey,
     updateColor, updateName, importStateCanvas, subtraction, union, intersection, resetState
 } = CanvasSlice.actions
 

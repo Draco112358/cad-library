@@ -1,6 +1,6 @@
 import { Dispatch } from "@reduxjs/toolkit";
 import { FC } from "react";
-import { TorusEntity, TRANSF_PARAMS_DEFAULTS } from "../../../model/componentEntity/componentEntity";
+import { ComponentEntity, TorusGeometryAttributes, TRANSF_PARAMS_DEFAULTS } from "../../../model/componentEntity/componentEntity";
 import { getNewKeys } from "../cube/cube";
 
 interface TorusProps {
@@ -13,7 +13,7 @@ interface TorusProps {
 }
 
 export function getDefaultTorus(numberOfGeneratedKey: number, dispatch: Dispatch) {
-    const component: TorusEntity = {
+    const component: ComponentEntity = {
         type: 'TORUS',
         name: 'TORUS',
         keyComponent: getNewKeys(numberOfGeneratedKey, dispatch)[0],
@@ -21,11 +21,12 @@ export function getDefaultTorus(numberOfGeneratedKey: number, dispatch: Dispatch
         transformationParams: TRANSF_PARAMS_DEFAULTS,
         color: getComputedStyle(document.documentElement).getPropertyValue('--torusColor').replace(' ', ''),
         previousTransformationParams: TRANSF_PARAMS_DEFAULTS,
+        geometryAttributes: {
         tubularSegments: 20,
         torusRadius: 2,
         tubeRadius: 0.4,
         radialSegments: 8,
-        centralAngle: Math.PI*2
+        centralAngle: Math.PI*2} as TorusGeometryAttributes
     }
     return component
 }

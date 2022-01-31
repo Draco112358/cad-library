@@ -2,12 +2,13 @@ export type {
     TransformationParamDetails,
     TransformationParams,
     ComponentEntity,
-    CubeEntity,
-    SphereEntity, 
+    CubeGeometryAttributes,
+    SphereGeometryAttributes, 
     CompositeEntity,
-    BufferEntity,
-    CylinderEntity,
-    TorusEntity,
-    ConeEntity
+    BufferGeometryAttributes,
+    CylinderGeometryAttributes,
+    TorusGeometryAttributes,
+    ConeGeometryAttributes,
+    GeometryAttributes
 } from "./componentEntity"
 export {areEquals, TRANSF_PARAMS_DEFAULTS} from "./componentEntity"
