@@ -43,6 +43,7 @@ export const CanvasSlice = createSlice({
         updateEntityGeometryParams(state: CanvasState, action: PayloadAction<GeometryAttributes>){
             setLastActionType(state, action.type)
             let selectedComponent = findComponentByKey(state.components, state.selectedComponentKey)
+            selectedComponent.previousGeometryAttributes = selectedComponent.geometryAttributes
             selectedComponent.geometryAttributes = action.payload
         },
         selectComponent(state: CanvasState, action: PayloadAction<number>) {

@@ -32,7 +32,8 @@ export type ComponentEntity = {
     previousTransformationParams: TransformationParams
     color: string
     keyComponent: number, 
-    geometryAttributes: GeometryAttributes
+    geometryAttributes: GeometryAttributes,
+    previousGeometryAttributes?: GeometryAttributes
 }
 
 export type GeometryAttributes = {}

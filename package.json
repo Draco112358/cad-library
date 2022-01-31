@@ -3,7 +3,7 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/Draco112358"
   },
-  "version": "0.1.14",
+  "version": "0.1.15",
   "scripts": {
     "rollup": "rollup -c"
   },
