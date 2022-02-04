@@ -32,7 +32,6 @@ export function getDefaultCube(numberOfGeneratedKey: number, dispatch: Dispatch)
         keyComponent: getNewKeys(numberOfGeneratedKey, dispatch)[0],
         orbitEnabled: true,
         transformationParams: TRANSF_PARAMS_DEFAULTS,
-        color: getComputedStyle(document.documentElement).getPropertyValue('--cubeColor').replace(' ', ''),
         previousTransformationParams: TRANSF_PARAMS_DEFAULTS,
         geometryAttributes: {
             width: 1,

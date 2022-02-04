@@ -22,7 +22,6 @@ export function getDefaultCylinder(numberOfGeneratedKey: number, dispatch: Dispa
         keyComponent: getNewKeys(numberOfGeneratedKey, dispatch)[0],
         orbitEnabled: true,
         transformationParams: TRANSF_PARAMS_DEFAULTS,
-        color: getComputedStyle(document.documentElement).getPropertyValue('--cylinderColor').replace(' ', ''),
         previousTransformationParams: TRANSF_PARAMS_DEFAULTS,
         geometryAttributes: {
             height: 1,

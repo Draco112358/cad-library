@@ -38,8 +38,8 @@ export const meshFrom = (entity: ComponentEntity) => {
 }
 
 const materialPhongFrom = (entity: ComponentEntity) => {
-    let material = new THREE.MeshPhongMaterial()
-    material.color.set(entity.color)
+    let material = new THREE.MeshPhongMaterial();
+    (entity.material != undefined) && material.color.set(entity.material.color)
     return material
 }
 

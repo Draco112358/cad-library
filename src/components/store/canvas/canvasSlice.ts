@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { StateWithHistory } from 'redux-undo';
 import { ComponentEntity, GeometryAttributes, TransformationParams } from '../..';
 import { ImportActionParamsObject } from '../../importFunctions/importFunctions';
+import { Material } from '../../model/componentEntity/componentEntity';
 
 export type CanvasState = {
     components: ComponentEntity[],
@@ -53,10 +54,15 @@ export const CanvasSlice = createSlice({
         incrementNumberOfGeneratedKey(state: CanvasState, action: PayloadAction<number>) {
             state.numberOfGeneratedKey += action.payload;
         },
-        updateColor(state: CanvasState, action: PayloadAction<{ key: number, color: string }>) {
+        setComponentMaterial(state: CanvasState, action: PayloadAction<{ key: number, material: Material }>) {
             setLastActionType(state, action.type)
             let component = findComponentByKey(state.components, action.payload.key);
-            component.color = action.payload.color
+            component.material = action.payload.material
+        },
+        removeComponentMaterial(state: CanvasState, action: PayloadAction<{ keyComponent: number}>) {
+            setLastActionType(state, action.type)
+            let component = findComponentByKey(state.components, action.payload.keyComponent);
+            component.material = undefined;
         },
         updateName(state: CanvasState, action: PayloadAction<{ key: number, name: string }>) {
             setLastActionType(state, action.type)
@@ -105,7 +111,7 @@ export const CanvasSlice = createSlice({
 export const {
     //qui vanno inserite tutte le azioni che vogliamo esporatare
     addComponent, removeComponent, updateTransformationParams, updateEntityGeometryParams, selectComponent, incrementNumberOfGeneratedKey,
-    updateColor, updateName, importStateCanvas, subtraction, union, intersection, resetState
+    setComponentMaterial, removeComponentMaterial, updateName, importStateCanvas, subtraction, union, intersection, resetState
 } = CanvasSlice.actions
 
 export const canvasStateSelector = (state: { canvas: StateWithHistory<CanvasState> }) => state.canvas.present;

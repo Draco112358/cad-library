@@ -7,12 +7,13 @@ import { BufferComponent } from "../bufferComponent/bufferComponent";
 
 interface CompositeProps {
     entity: CompositeEntity
+    color: string
 }
 
-export const Composite: FC<CompositeProps> = ({ entity }) => {
+export const Composite: FC<CompositeProps> = ({ entity, color }) => {
     let compositeMesh = useMemo(() => meshFrom(entity), [entity.baseElements])
 
     return (
-        <BufferComponent color={entity.color} positionVertices={compositeMesh.geometry.attributes.position.array as Float32Array} normalVertices={compositeMesh.geometry.attributes.normal.array as Float32Array}/>
+        <BufferComponent color={color} positionVertices={compositeMesh.geometry.attributes.position.array as Float32Array} normalVertices={compositeMesh.geometry.attributes.normal.array as Float32Array}/>
     )
 }

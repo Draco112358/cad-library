@@ -21,7 +21,6 @@ export function getDefaultSphere(numberOfGeneratedKey: number, dispatch: Dispatc
         keyComponent: getNewKeys(numberOfGeneratedKey, dispatch)[0],
         orbitEnabled: true,
         transformationParams: TRANSF_PARAMS_DEFAULTS,
-        color: getComputedStyle(document.documentElement).getPropertyValue('--sphereColor').replace(' ', ''),
         previousTransformationParams: TRANSF_PARAMS_DEFAULTS,
         geometryAttributes: {
             radius: 1,

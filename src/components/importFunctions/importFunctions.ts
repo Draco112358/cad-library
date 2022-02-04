@@ -16,7 +16,6 @@ export const importFromCadSTL = (STLFile: File, numberOfGeneratedKey: number, di
             keyComponent: getNewKeys(numberOfGeneratedKey, dispatch)[0],
             orbitEnabled: true,
             transformationParams: TRANSF_PARAMS_DEFAULTS,
-            color: '#ec2626',
             previousTransformationParams: TRANSF_PARAMS_DEFAULTS,
             geometryAttributes: {
                 positionVertices: res.attributes.position.array as Float32Array,

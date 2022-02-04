@@ -19,7 +19,6 @@ export function getDefaultTorus(numberOfGeneratedKey: number, dispatch: Dispatch
         keyComponent: getNewKeys(numberOfGeneratedKey, dispatch)[0],
         orbitEnabled: true,
         transformationParams: TRANSF_PARAMS_DEFAULTS,
-        color: getComputedStyle(document.documentElement).getPropertyValue('--torusColor').replace(' ', ''),
         previousTransformationParams: TRANSF_PARAMS_DEFAULTS,
         geometryAttributes: {
         tubularSegments: 20,
@@ -40,3 +39,5 @@ export const Torus: FC<TorusProps> = ({torusRadius, tubeRadius, radialSegments, 
         </>
     )
 }
+
+//getComputedStyle(document.documentElement).getPropertyValue('--torusColor').replace(' ', '')
