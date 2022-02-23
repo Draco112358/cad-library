@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { StateWithHistory } from 'redux-undo';
-import { ComponentEntity, GeometryAttributes, TransformationParams } from '../..';
+import { ComponentEntity, GeometryAttributes, getNewKeys, TransformationParams } from '../..';
 import { ImportActionParamsObject } from '../../importFunctions/importFunctions';
 import { Material } from '../../model/componentEntity/componentEntity';
 
@@ -35,13 +35,13 @@ export const CanvasSlice = createSlice({
             });
             (action.payload === state.selectedComponentKey) && setSelectedComponent(state, 0)
         },
-        updateTransformationParams(state: CanvasState, action: PayloadAction<TransformationParams>){
+        updateTransformationParams(state: CanvasState, action: PayloadAction<TransformationParams>) {
             setLastActionType(state, action.type)
             let selectedComponent = findComponentByKey(state.components, state.selectedComponentKey)
             selectedComponent.previousTransformationParams = selectedComponent.transformationParams
             selectedComponent.transformationParams = action.payload
         },
-        updateEntityGeometryParams(state: CanvasState, action: PayloadAction<GeometryAttributes>){
+        updateEntityGeometryParams(state: CanvasState, action: PayloadAction<GeometryAttributes>) {
             setLastActionType(state, action.type)
             let selectedComponent = findComponentByKey(state.components, state.selectedComponentKey)
             selectedComponent.previousGeometryAttributes = selectedComponent.geometryAttributes
@@ -59,7 +59,7 @@ export const CanvasSlice = createSlice({
             let component = findComponentByKey(state.components, action.payload.key);
             component.material = action.payload.material
         },
-        removeComponentMaterial(state: CanvasState, action: PayloadAction<{ keyComponent: number}>) {
+        removeComponentMaterial(state: CanvasState, action: PayloadAction<{ keyComponent: number }>) {
             setLastActionType(state, action.type)
             let component = findComponentByKey(state.components, action.payload.keyComponent);
             component.material = undefined;
@@ -71,29 +71,34 @@ export const CanvasSlice = createSlice({
         },
         importStateCanvas(state: CanvasState, action: PayloadAction<ImportActionParamsObject>) {
             setLastActionType(state, action.type)
-            state.components = state.components.concat(action.payload.canvas.components)
-             if(state.numberOfGeneratedKey < action.payload.canvas.numberOfGeneratedKey) {state.numberOfGeneratedKey = action.payload.canvas.numberOfGeneratedKey}
+            state.components = state.components.concat(
+                action.payload.canvas.components.map(component => {
+                    component.keyComponent += state.numberOfGeneratedKey
+                    return component
+                })
+            )
+            state.numberOfGeneratedKey = maximumKeyComponentAmong(state.components)
         },
-        subtraction(state: CanvasState, action: PayloadAction<{elementsToRemove: number[], newEntity: ComponentEntity[], selectedEntityCopy: ComponentEntity}>){
+        subtraction(state: CanvasState, action: PayloadAction<{ elementsToRemove: number[], newEntity: ComponentEntity[], selectedEntityCopy: ComponentEntity }>) {
             setLastActionType(state, action.type)
             state.components = state.components.filter(component => !action.payload.elementsToRemove.includes(component.keyComponent))
             action.payload.newEntity.map(entity => state.components.push(entity))
             state.components.push(action.payload.selectedEntityCopy)
             setSelectedComponent(state, action.payload.newEntity[action.payload.newEntity.length - 1].keyComponent)
         },
-        union(state: CanvasState, action: PayloadAction<{elementsToRemove: number[], newEntity: ComponentEntity}>){
+        union(state: CanvasState, action: PayloadAction<{ elementsToRemove: number[], newEntity: ComponentEntity }>) {
             setLastActionType(state, action.type)
             state.components = state.components.filter(component => !action.payload.elementsToRemove.includes(component.keyComponent))
             state.components.push(action.payload.newEntity)
             setSelectedComponent(state, action.payload.newEntity.keyComponent)
         },
-        intersection(state: CanvasState, action: PayloadAction<{elementsToRemove: number[], newEntity: ComponentEntity[]}>){
+        intersection(state: CanvasState, action: PayloadAction<{ elementsToRemove: number[], newEntity: ComponentEntity[] }>) {
             setLastActionType(state, action.type)
             state.components = state.components.filter(component => !action.payload.elementsToRemove.includes(component.keyComponent))
             action.payload.newEntity.map(entity => state.components.push(entity))
             setSelectedComponent(state, action.payload.newEntity[action.payload.newEntity.length - 1].keyComponent)
         },
-        resetState(state: CanvasState){
+        resetState(state: CanvasState) {
             state.components = initialState.components
             state.selectedComponentKey = initialState.selectedComponentKey
             state.lastActionType = initialState.lastActionType
@@ -127,3 +132,4 @@ export const numberOfGeneratedKeySelector = (state: { canvas: StateWithHistory<C
 export const findComponentByKey = (components: ComponentEntity[], key: number) => components.filter(component => component.keyComponent === key)[0]
 const setSelectedComponent = (state: CanvasState, keyComponentToSelect: number) => state.selectedComponentKey = keyComponentToSelect
 const setLastActionType = (state: CanvasState, actionType: string) => state.lastActionType = actionType
+const maximumKeyComponentAmong = (components: ComponentEntity[]) => components.reduce((max, component) => max = (component.keyComponent > max) ? component.keyComponent : max,0) 
