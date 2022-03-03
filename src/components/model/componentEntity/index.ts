@@ -10,6 +10,7 @@ export type {
     TorusGeometryAttributes,
     ConeGeometryAttributes,
     GeometryAttributes, 
-    Material
+    Material, 
+    CircleGeometryAttributes
 } from "./componentEntity"
 export {areEquals, TRANSF_PARAMS_DEFAULTS} from "./componentEntity"

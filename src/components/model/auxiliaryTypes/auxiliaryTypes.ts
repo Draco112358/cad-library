@@ -1,6 +1,6 @@
 export type BinaryOperationType = "UNION" | "INTERSECTION" | "SUBTRACTION" 
 
-export type ComponentTypes = "BUFFER" | "CONE" | "CUBE" | "CYLINDER" | "SPHERE" | "TORUS" | BinaryOperationType
+export type ComponentTypes = "BUFFER" | "CONE" | "CUBE" | "CYLINDER" | "SPHERE" | "TORUS" | "CIRCLE" | BinaryOperationType
 
 export const DefaultColorShapes = {
     cubeColor: "#420202",
@@ -10,5 +10,6 @@ export const DefaultColorShapes = {
     coneColor: "#065c06",
     bufferColor: "#065c06",
     compositeColor: "#065c06",
+    circleColor: "#420202"
 
 }

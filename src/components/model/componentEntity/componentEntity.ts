@@ -62,6 +62,13 @@ export type CubeGeometryAttributes = {
     depthSegments?: number
 } & GeometryAttributes
 
+export type CircleGeometryAttributes = {
+    radius: number,
+    segments?: number,
+    thetaStart?: number,
+    thetaLength?: number
+} & GeometryAttributes
+
 
 export type SphereGeometryAttributes = {
     radius: number,
