@@ -36,10 +36,10 @@ export function getDefaultSphere(numberOfGeneratedKey: number, dispatch: Dispatc
     return component
 }
 
-export const Sphere: FC<SphereProps> = ({ radius, widthSegments, heightSegments, color }) => {
+export const Sphere: FC<SphereProps> = ({ radius, widthSegments, heightSegments, color, phiLength, phiStart, thetaLength, thetaStart }) => {
     return (
         <>
-            <sphereGeometry args={[radius, widthSegments, heightSegments]} />
+            <sphereGeometry args={[radius, widthSegments, heightSegments, phiStart, phiLength, thetaStart, thetaLength]} />
             <meshPhongMaterial color={color} />
         </>
     )

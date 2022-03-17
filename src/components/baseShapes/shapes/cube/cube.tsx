@@ -47,11 +47,11 @@ export function getDefaultCube(numberOfGeneratedKey: number, dispatch: Dispatch)
 }
 
 export const Cube: FC<CubeProps> = (
-    { width, height, depth, color }
+    { width, height, depth, color, depthSegments, widthSegments, heigthSegments}
 ) => {
     return (
         <>
-            <boxGeometry args={[width, height, depth]} />
+            <boxGeometry args={[width, height, depth, widthSegments, heigthSegments, depthSegments]} />
             <meshPhongMaterial color={color} />
         </>
     )
