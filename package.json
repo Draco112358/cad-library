@@ -1,8 +1,5 @@
 {
-  "name": "@Draco112358/cad-library",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/Draco112358"
-  },
+  "name": "cad-library",
   "version": "0.1.20",
   "scripts": {
     "rollup": "rollup -c"
