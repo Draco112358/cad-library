@@ -1,6 +1,6 @@
 {
   "name": "cad-library",
-  "version": "0.1.21",
+  "version": "0.1.22",
   "scripts": {
     "rollup": "rollup -c"
   },
@@ -22,14 +22,14 @@
     "typescript": "^4.1.2"
   },
   "peerDependencies": {
-    "@react-three/fiber": "^7.0.7",
+    "@react-three/fiber": "^7.0.27",
     "@reduxjs/toolkit": "^1.7.1",
     "@types/react": "^17.0.0",
     "@types/three": "^0.132.2",
     "react": "^17.0.2",
     "react-redux": "^7.2.6",
     "redux-undo": "^1.0.1",
-    "three": "^0.134.0",
+    "three": "^0.137.0",
     "three-csg-ts": "^3.1.9"
   }
 }
