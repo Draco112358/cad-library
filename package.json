@@ -1,6 +1,6 @@
 {
   "name": "cad-library",
-  "version": "0.1.22",
+  "version": "0.1.23",
   "scripts": {
     "rollup": "rollup -c"
   },
@@ -26,10 +26,11 @@
     "@reduxjs/toolkit": "^1.7.1",
     "@types/react": "^17.0.0",
     "@types/three": "^0.132.2",
-    "react": "^17.0.2",
+    "react": ">=16.11.0",
     "react-redux": "^7.2.6",
     "redux-undo": "^1.0.1",
     "three": "^0.137.0",
-    "three-csg-ts": "^3.1.9"
+    "three-csg-ts": "^3.1.9",
+    "@auth0/auth0-react": "^1.10.1"
   }
 }
