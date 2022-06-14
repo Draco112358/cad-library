@@ -1,1 +1,1 @@
-export {SetUser} from "./setUser"
+export {useSetUserInfo} from "./useSetUserInfo"
