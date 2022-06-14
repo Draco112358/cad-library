@@ -13,7 +13,7 @@ export const User: FC<{}> = () => {
             const tok = await getIdTokenClaims()
             return tok
         }
-        getToken().then(token => (token && token.name) && dispatch(setUser({userName: token.name, userRole: token['https.//db.fauna.com/roles'][0]})))
+        getToken().then(token => (token && token.name) && dispatch(setUser({userName: token.name, userRole: token['https://db.fauna.com/roles'][0]})))
     }, [])
 
 
