@@ -1,9 +1,9 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { useEffect } from "react";
+import { FC, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setUser, unsetUser } from "../store";
 
-export const useSetUserInfo = () => {
+export const SetUserInfo:FC<{}> = () => {
 
     const { user } = useAuth0()
     const dispatch = useDispatch()
@@ -11,4 +11,6 @@ export const useSetUserInfo = () => {
     useEffect(() => {
         (user && user.name) ? dispatch(setUser({userName: user.name, userRole: user['https://db.fauna.com/roles'][0]})) : dispatch(unsetUser())
       }, [user])
+
+      return <></>
 }
