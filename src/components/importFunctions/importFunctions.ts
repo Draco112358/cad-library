@@ -35,6 +35,10 @@ export const importFromCadProject = (file: File, dispatch: Dispatch, action: (pa
     })
 }
 
+export const importCadModelFromDB = (dispatch: Dispatch, action: (params: ImportActionParamsObject) => any, actionParamsObject: ImportActionParamsObject) => {
+    dispatch(action(actionParamsObject))
+}
+
 export type ImportActionParamsObject = {
     canvas: CanvasState,
     id: string | undefined
