@@ -5,6 +5,7 @@ import toast from "react-hot-toast"
 import { useDispatch } from "react-redux"
 import { ImportActionParamsObject, importCadModelFromDB } from "../../importFunctions/importFunctions"
 import { FaunaCadModel, getModelsByOwner } from "../api/modelsAPIs"
+import { useFaunaQuery } from "../useFaunaQuery"
 
 export const ImportModelFromDBModal: FC<{ showModalLoad: Function, importActionParams: ImportActionParamsObject, importAction:(params: ImportActionParamsObject) => any }> = ({ showModalLoad, importActionParams, importAction }) => {
 
@@ -12,14 +13,11 @@ export const ImportModelFromDBModal: FC<{ showModalLoad: Function, importActionP
     const [selectedModel, setSelectedModel] = useState<FaunaCadModel | undefined>(undefined)
     const [loadingMessage, setLoadingMessage] = useState("Loading...")
     const { user } = useAuth0()
+    const {execQuery} = useFaunaQuery()
     const dispatch = useDispatch()
 
     useEffect(() => {
-        const fetchModels = async (userID: string) => {
-            const mods = await getModelsByOwner(userID)
-            return mods
-        }
-        (user !== undefined && user.sub !== undefined) && fetchModels(user.sub).then(mods => {
+        (user !== undefined && user.sub !== undefined) && execQuery(getModelsByOwner, user.sub).then(mods => {
             setModels(mods);
             (models.length === 0) && setLoadingMessage("No models to load form database.")
         })

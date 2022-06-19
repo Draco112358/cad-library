@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
-import { faunaClient, faunaQuery } from "../client"
 import { ComponentEntity } from "../../model/componentEntity/componentEntity";
+import faunadb from "faunadb"
 
 export type FaunaCadModel = {
     name: string,
@@ -9,7 +9,7 @@ export type FaunaCadModel = {
     owner: string
 }
 
-export async function saveNewModel(newModel: FaunaCadModel) {
+export async function saveNewModel(faunaClient: faunadb.Client, faunaQuery: typeof faunadb.query, newModel: FaunaCadModel) {
     try {
         await faunaClient.query((
             faunaQuery.Create(
@@ -28,7 +28,7 @@ export async function saveNewModel(newModel: FaunaCadModel) {
     }
 }
 
-export const getModelsByOwner = async (owner_id: string) => {
+export const getModelsByOwner = async (faunaClient: faunadb.Client, faunaQuery: typeof faunadb.query, owner_id: string) => {
     try {
         const response = await faunaClient.query(
             faunaQuery.Select("data",
