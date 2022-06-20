@@ -39,8 +39,8 @@ export const ImportModelFromDBModal: FC<{ showModalLoad: Function, importActionP
                         </tr>
                     </thead>
                     <tbody>
-                        {models.map((model) => {
-                            return <tr>
+                        {models.map((model, index) => {
+                            return <tr key={index}>
                                 <td>
                                     <input
                                         key={model.name}
