@@ -6,7 +6,8 @@ export type FaunaCadModel = {
     name: string,
     components: ComponentEntity[],
     owner_id: string,
-    owner: string
+    owner: string,
+    userSharingWith?: string[]
 }
 
 export async function saveNewModel(faunaClient: faunadb.Client, faunaQuery: typeof faunadb.query, newModel: FaunaCadModel) {
