@@ -11,9 +11,7 @@ export {
     removeComponentMaterial,
     updateName, 
     importStateCanvas,
-    subtraction,
-    union,
-    intersection,
+    binaryOperation,
     resetState,
 
 } from "./canvasSlice"

@@ -79,24 +79,11 @@ export const CanvasSlice = createSlice({
             )
             state.numberOfGeneratedKey = maximumKeyComponentAmong(state.components)
         },
-        subtraction(state: CanvasState, action: PayloadAction<{ elementsToRemove: number[], newEntity: ComponentEntity[], selectedEntityCopy: ComponentEntity }>) {
-            setLastActionType(state, action.type)
-            state.components = state.components.filter(component => !action.payload.elementsToRemove.includes(component.keyComponent))
-            action.payload.newEntity.map(entity => state.components.push(entity))
-            state.components.push(action.payload.selectedEntityCopy)
-            setSelectedComponent(state, action.payload.newEntity[action.payload.newEntity.length - 1].keyComponent)
-        },
-        union(state: CanvasState, action: PayloadAction<{ elementsToRemove: number[], newEntity: ComponentEntity }>) {
+        binaryOperation(state: CanvasState, action: PayloadAction<{ elementsToRemove: number[], newEntity: ComponentEntity }>) {
             setLastActionType(state, action.type)
             state.components = state.components.filter(component => !action.payload.elementsToRemove.includes(component.keyComponent))
             state.components.push(action.payload.newEntity)
             setSelectedComponent(state, action.payload.newEntity.keyComponent)
-        },
-        intersection(state: CanvasState, action: PayloadAction<{ elementsToRemove: number[], newEntity: ComponentEntity[] }>) {
-            setLastActionType(state, action.type)
-            state.components = state.components.filter(component => !action.payload.elementsToRemove.includes(component.keyComponent))
-            action.payload.newEntity.map(entity => state.components.push(entity))
-            setSelectedComponent(state, action.payload.newEntity[action.payload.newEntity.length - 1].keyComponent)
         },
         resetState(state: CanvasState) {
             state.components = initialState.components
@@ -116,7 +103,7 @@ export const CanvasSlice = createSlice({
 export const {
     //qui vanno inserite tutte le azioni che vogliamo esporatare
     addComponent, removeComponent, updateTransformationParams, updateEntityGeometryParams, selectComponent, incrementNumberOfGeneratedKey,
-    setComponentMaterial, removeComponentMaterial, updateName, importStateCanvas, subtraction, union, intersection, resetState
+    setComponentMaterial, removeComponentMaterial, updateName, importStateCanvas, binaryOperation, resetState
 } = CanvasSlice.actions
 
 export const canvasStateSelector = (state: { canvas: StateWithHistory<CanvasState> }) => state.canvas.present;
