@@ -21,7 +21,9 @@ export const importFromCadSTL = (STLFile: File, numberOfGeneratedKey: number, di
                 positionVertices: res.attributes.position.array as Float32Array,
                 normalVertices: res.attributes.normal.array as Float32Array,
                 uvVertices: undefined
-            } as BufferGeometryAttributes
+            } as BufferGeometryAttributes,
+            transparency: true,
+            opacity: 1
         }
 
         dispatch(addComponent(entity))

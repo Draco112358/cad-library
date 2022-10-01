@@ -12,7 +12,9 @@ interface CylinderProps {
     openEnded?: boolean,
     thetaLength?: number,
     thetaStart?: number,
-    color: string
+    color: string,
+    opacity: number, 
+    transparency: boolean
 }
 
 export function getDefaultCylinder(numberOfGeneratedKey: number, dispatch: Dispatch) {
@@ -32,20 +34,22 @@ export function getDefaultCylinder(numberOfGeneratedKey: number, dispatch: Dispa
             openEnded: false,
             thetaStart: 0,
             thetaLength: Math.PI * 2
-        } as CylinderGeometryAttributes
+        } as CylinderGeometryAttributes,
+        transparency: true,
+        opacity: 1
     }
     return component
 }
 
 
 export const Cylinder: FC<CylinderProps> = (
-    { topRadius, bottomRadius, height, radialSegments, heightSegments, openEnded, thetaLength, thetaStart, color }
+    { topRadius, bottomRadius, height, radialSegments, heightSegments, openEnded, thetaLength, thetaStart, color, opacity, transparency }
 ) => {
 
     return (
         <>
             <cylinderGeometry args={[topRadius, bottomRadius, height, radialSegments, heightSegments, openEnded, thetaStart, thetaLength]} />
-            <meshPhongMaterial color={color} />
+            <meshPhongMaterial color={color} opacity={opacity} transparent={transparency}/>
         </>
     )
 }

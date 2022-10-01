@@ -8,7 +8,9 @@ interface CircleProps {
     segments?: number,
     color: string,
     thetaStart?: number,
-    thetaLength?: number
+    thetaLength?: number,
+    opacity: number, 
+    transparency: boolean
 }
 
 export function getDefaultCircle(numberOfGeneratedKey: number, dispatch: Dispatch) {
@@ -24,17 +26,19 @@ export function getDefaultCircle(numberOfGeneratedKey: number, dispatch: Dispatc
             segments: 20,
             thetaStart: 0,
             thetaLength: Math.PI
-        } as CircleGeometryAttributes
+        } as CircleGeometryAttributes,
+        transparency: true,
+        opacity: 1
 
     }
     return component
 }
 
-export const Circle: FC<CircleProps> = ({ radius, segments, color, thetaLength, thetaStart }) => {
+export const Circle: FC<CircleProps> = ({ radius, segments, color, thetaLength, thetaStart, opacity , transparency}) => {
     return (
         <>
             <circleGeometry args={[radius, segments, thetaStart, thetaLength]} />
-            <meshPhongMaterial color={color} />
+            <meshPhongMaterial color={color} opacity={opacity} transparent={transparency}/>
         </>
     )
 }

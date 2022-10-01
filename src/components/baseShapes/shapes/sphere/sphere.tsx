@@ -11,7 +11,9 @@ interface SphereProps {
     phiStart?: number,
     phiLength?: number,
     thetaStart?: number,
-    thetaLength?: number
+    thetaLength?: number,
+    opacity: number,
+    transparency: boolean
 }
 
 export function getDefaultSphere(numberOfGeneratedKey: number, dispatch: Dispatch) {
@@ -30,17 +32,19 @@ export function getDefaultSphere(numberOfGeneratedKey: number, dispatch: Dispatc
             thetaStart: 0,
             phiLength: Math.PI * 2,
             thetaLength: Math.PI
-        } as SphereGeometryAttributes
+        } as SphereGeometryAttributes,
+        transparency: true,
+        opacity: 1
 
     }
     return component
 }
 
-export const Sphere: FC<SphereProps> = ({ radius, widthSegments, heightSegments, color, phiLength, phiStart, thetaLength, thetaStart }) => {
+export const Sphere: FC<SphereProps> = ({ radius, widthSegments, heightSegments, color, phiLength, phiStart, thetaLength, thetaStart, opacity, transparency }) => {
     return (
         <>
             <sphereGeometry args={[radius, widthSegments, heightSegments, phiStart, phiLength, thetaStart, thetaLength]} />
-            <meshPhongMaterial color={color} />
+            <meshPhongMaterial color={color} opacity={opacity} transparent={transparency}/>
         </>
     )
 }

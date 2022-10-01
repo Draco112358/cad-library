@@ -64,6 +64,16 @@ export const CanvasSlice = createSlice({
             let component = findComponentByKey(state.components, action.payload.keyComponent);
             component.material = undefined;
         },
+        setComponentOpacity(state: CanvasState, action: PayloadAction<{key: number, opacity: number}>){
+            setLastActionType(state, action.type)
+            let component = findComponentByKey(state.components, action.payload.key);
+            component.opacity = action.payload.opacity
+        },
+        setComponentTransparency(state: CanvasState, action: PayloadAction<{key: number, transparency: boolean}>){
+            setLastActionType(state, action.type)
+            let component = findComponentByKey(state.components, action.payload.key);
+            component.transparency = action.payload.transparency
+        },
         updateName(state: CanvasState, action: PayloadAction<{ key: number, name: string }>) {
             setLastActionType(state, action.type)
             let component = findComponentByKey(state.components, action.payload.key);
@@ -103,7 +113,7 @@ export const CanvasSlice = createSlice({
 export const {
     //qui vanno inserite tutte le azioni che vogliamo esporatare
     addComponent, removeComponent, updateTransformationParams, updateEntityGeometryParams, selectComponent, incrementNumberOfGeneratedKey,
-    setComponentMaterial, removeComponentMaterial, updateName, importStateCanvas, binaryOperation, resetState
+    setComponentMaterial, removeComponentMaterial, updateName, importStateCanvas, binaryOperation, resetState, setComponentOpacity, setComponentTransparency
 } = CanvasSlice.actions
 
 export const canvasStateSelector = (state: { canvas: StateWithHistory<CanvasState> }) => state.canvas.present;

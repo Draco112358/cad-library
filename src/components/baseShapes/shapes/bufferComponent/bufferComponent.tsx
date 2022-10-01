@@ -3,10 +3,12 @@ import {FC} from "react";
 interface BufferComponentProps {
     positionVertices: Float32Array,
     normalVertices: Float32Array,
-    color: string
+    color: string,
+    opacity: number,
+    transparency: boolean
 }
 
-export const BufferComponent: FC<BufferComponentProps> = ({positionVertices, normalVertices, color}) => {
+export const BufferComponent: FC<BufferComponentProps> = ({positionVertices, normalVertices, color, opacity, transparency}) => {
     return (
         <>
             <bufferGeometry>
@@ -17,7 +19,7 @@ export const BufferComponent: FC<BufferComponentProps> = ({positionVertices, nor
                                  array={normalVertices}
                                  count={normalVertices.length / 3}/>
             </bufferGeometry>
-            <meshPhongMaterial color={color}/>
+            <meshPhongMaterial color={color} opacity={opacity} transparent={transparency}/>
         </>
     )
 }

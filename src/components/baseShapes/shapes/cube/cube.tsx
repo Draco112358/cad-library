@@ -11,7 +11,9 @@ interface CubeProps {
     depth: number,
     widthSegments?: number,
     heigthSegments?: number,
-    depthSegments?: number
+    depthSegments?: number,
+    opacity: number,
+    transparency: boolean
 }
 
 export function getNewKeys(numberOfGeneratedKey: number, dispatch: Dispatch, numberOfKeyToGenerate = 1) {
@@ -40,19 +42,21 @@ export function getDefaultCube(numberOfGeneratedKey: number, dispatch: Dispatch)
             depthSegments: 1,
             heigthSegments: 1,
             widthSegments: 1
-        } as CubeGeometryAttributes
+        } as CubeGeometryAttributes,
+        transparency: true,
+        opacity: 1
 
     }
     return component
 }
 
 export const Cube: FC<CubeProps> = (
-    { width, height, depth, color, depthSegments, widthSegments, heigthSegments}
+    { width, height, depth, color, depthSegments, widthSegments, heigthSegments, opacity, transparency}
 ) => {
     return (
         <>
             <boxGeometry args={[width, height, depth, widthSegments, heigthSegments, depthSegments]} />
-            <meshPhongMaterial color={color} />
+            <meshPhongMaterial color={color} opacity={opacity} transparent={transparency}/>
         </>
     )
 }

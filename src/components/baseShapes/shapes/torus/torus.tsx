@@ -9,7 +9,9 @@ interface TorusProps {
     radialSegments?: number,
     tubularSegments?: number,
     centralAngle?: number,
-    color: string
+    color: string,
+    opacity: number,
+    transparency: boolean
 }
 
 export function getDefaultTorus(numberOfGeneratedKey: number, dispatch: Dispatch) {
@@ -25,17 +27,19 @@ export function getDefaultTorus(numberOfGeneratedKey: number, dispatch: Dispatch
         torusRadius: 2,
         tubeRadius: 0.4,
         radialSegments: 8,
-        centralAngle: Math.PI*2} as TorusGeometryAttributes
+        centralAngle: Math.PI*2} as TorusGeometryAttributes,
+        transparency: true,
+        opacity: 1
     }
     return component
 }
 
-export const Torus: FC<TorusProps> = ({torusRadius, tubeRadius, radialSegments, tubularSegments, centralAngle, color}) => {
+export const Torus: FC<TorusProps> = ({torusRadius, tubeRadius, radialSegments, tubularSegments, centralAngle, color, opacity, transparency}) => {
 
     return (
         <>
             <torusGeometry args={[torusRadius, tubeRadius, radialSegments, tubularSegments, centralAngle]}/>
-            <meshPhongMaterial color={color} />
+            <meshPhongMaterial color={color} opacity={opacity} transparent={transparency}/>
         </>
     )
 }

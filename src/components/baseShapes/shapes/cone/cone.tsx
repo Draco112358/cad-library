@@ -11,7 +11,9 @@ interface ConeProps {
     openEnded?: boolean,
     thetaLength?: number,
     thetaStart?: number,
-    color: string
+    color: string,
+    opacity: number, 
+    transparency: boolean
 }
 
 export function getDefaultCone(numberOfGeneratedKey: number, dispatch: Dispatch) {
@@ -30,20 +32,22 @@ export function getDefaultCone(numberOfGeneratedKey: number, dispatch: Dispatch)
             openEnded: false,
             thetaLength: Math.PI * 2,
             thetaStart: 0
-        } as ConeGeometryAttributes
+        } as ConeGeometryAttributes,
+        transparency: true,
+        opacity: 1
     }
     return component
 }
 
 
 export const Cone: FC<ConeProps> = (
-    { radius, height, radialSegments, heightSegments, openEnded, thetaLength, thetaStart, color }
+    { radius, height, radialSegments, heightSegments, openEnded, thetaLength, thetaStart, color, opacity, transparency}
 ) => {
 
     return (
         <>
             <coneGeometry args={[radius, height, radialSegments, heightSegments, openEnded, thetaStart, thetaLength]} />
-            <meshPhongMaterial color={color} />
+            <meshPhongMaterial color={color} opacity={opacity} transparent={transparency}/>
         </>
     )
 }

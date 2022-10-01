@@ -31,6 +31,8 @@ export type ComponentEntity = {
     transformationParams: TransformationParams
     previousTransformationParams: TransformationParams
     material?: Material,
+    opacity : number,
+    transparency: boolean,
     keyComponent: number, 
     geometryAttributes: GeometryAttributes,
     previousGeometryAttributes?: GeometryAttributes
