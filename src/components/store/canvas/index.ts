@@ -12,8 +12,8 @@ export {
     updateName, 
     importStateCanvas,
     binaryOperation,
-    setComponentOpacity,
-    setComponentTransparency,
+    setComponentsOpacity,
+    setComponentsTransparency,
     resetState,
 
 } from "./canvasSlice"

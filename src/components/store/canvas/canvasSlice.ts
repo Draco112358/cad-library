@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Keys } from 'faunadb';
 import { StateWithHistory } from 'redux-undo';
 import { ComponentEntity, GeometryAttributes, getNewKeys, TransformationParams } from '../..';
 import { ImportActionParamsObject } from '../../importFunctions/importFunctions';
@@ -64,15 +65,15 @@ export const CanvasSlice = createSlice({
             let component = findComponentByKey(state.components, action.payload.keyComponent);
             component.material = undefined;
         },
-        setComponentOpacity(state: CanvasState, action: PayloadAction<{key: number, opacity: number}>){
+        setComponentsOpacity(state: CanvasState, action: PayloadAction<{keys: number[], opacity: number}>){
             setLastActionType(state, action.type)
-            let component = findComponentByKey(state.components, action.payload.key);
-            component.opacity = action.payload.opacity
+            let componentsToChange = state.components.filter(component => action.payload.keys.includes(component.keyComponent))
+            componentsToChange.map(component => component.opacity = action.payload.opacity)
         },
-        setComponentTransparency(state: CanvasState, action: PayloadAction<{key: number, transparency: boolean}>){
+        setComponentsTransparency(state: CanvasState, action: PayloadAction<{keys: number[], transparency: boolean}>){
             setLastActionType(state, action.type)
-            let component = findComponentByKey(state.components, action.payload.key);
-            component.transparency = action.payload.transparency
+            let componentsToChange = state.components.filter(component => action.payload.keys.includes(component.keyComponent))
+            componentsToChange.map(component => component.transparency = action.payload.transparency)
         },
         updateName(state: CanvasState, action: PayloadAction<{ key: number, name: string }>) {
             setLastActionType(state, action.type)
@@ -113,7 +114,7 @@ export const CanvasSlice = createSlice({
 export const {
     //qui vanno inserite tutte le azioni che vogliamo esporatare
     addComponent, removeComponent, updateTransformationParams, updateEntityGeometryParams, selectComponent, incrementNumberOfGeneratedKey,
-    setComponentMaterial, removeComponentMaterial, updateName, importStateCanvas, binaryOperation, resetState, setComponentOpacity, setComponentTransparency
+    setComponentMaterial, removeComponentMaterial, updateName, importStateCanvas, binaryOperation, resetState, setComponentsOpacity, setComponentsTransparency
 } = CanvasSlice.actions
 
 export const canvasStateSelector = (state: { canvas: StateWithHistory<CanvasState> }) => state.canvas.present;
