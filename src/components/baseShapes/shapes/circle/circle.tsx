@@ -29,7 +29,6 @@ export function getDefaultCircle(numberOfGeneratedKey: number, dispatch: Dispatc
         } as CircleGeometryAttributes,
         transparency: true,
         opacity: 1
-
     }
     return component
 }

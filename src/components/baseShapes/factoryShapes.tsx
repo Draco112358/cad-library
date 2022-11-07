@@ -40,6 +40,13 @@ export const FactoryShapes: FC<FactoryShapesProps> = ({ entity, color }) => {
     }
   };
 
+  if(entity.transparency === undefined){
+    entity.transparency = false
+  }
+  if(entity.opacity === undefined){
+    entity.opacity = 1
+  }
+
   switch (entity.type) {
     case "CUBE":
       let cubeGeometryAttributes =
