@@ -1,11 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type UsersState = {
+    email: string|undefined
     userName: string|undefined,
     userRole: string|undefined
 }
 
 const initialState: UsersState = {
+    email: undefined,
     userName: undefined,
     userRole: undefined
 }
@@ -15,11 +17,13 @@ export const UsersSlice = createSlice({
     initialState: initialState,
     reducers: {
         //qui vanno inserite le azioni
-        setUser(state: UsersState, action: PayloadAction<{userName: string, userRole: string}>){
+        setUser(state: UsersState, action: PayloadAction<{email: string, userName: string, userRole: string}>){
+            state.email = action.payload.email
             state.userName = action.payload.userName
             state.userRole = action.payload.userRole
         },
         unsetUser(state: UsersState){
+            state.email = undefined
             state.userName = undefined
             state.userRole = undefined
         }
