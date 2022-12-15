@@ -15,7 +15,9 @@ export const ImportModelFromDBModal: FC<{
   showModalLoad: Function;
   importActionParams: ImportActionParamsObject;
   importAction: (params: ImportActionParamsObject) => any;
-}> = ({ showModalLoad, importActionParams, importAction }) => {
+  s3Config: AWS.S3;
+  bucket: string;
+}> = ({ showModalLoad, importActionParams, importAction, s3Config, bucket }) => {
   const [models, setModels] = useState<FaunaCadModel[]>([]);
   const [selectedModel, setSelectedModel] = useState<FaunaCadModel | undefined>(
     undefined
@@ -124,7 +126,7 @@ export const ImportModelFromDBModal: FC<{
                             toast.error("You must select a model to load.");
                           }
                         : () => {
-                            getFileS3(selectedModel.components).then(
+                            getFileS3(s3Config,bucket,selectedModel.components).then(
                               (components) => {
                                 if (components !== undefined) {
                                   importActionParams.canvas.components =

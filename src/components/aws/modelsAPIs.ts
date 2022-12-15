@@ -1,13 +1,13 @@
 import { ComponentEntity } from '../model';
-import {s3} from './s3Config';
+import AWS from "aws-sdk"
 
-export const getFileS3 = async (fileKey: string) => {
+export const getFileS3 = async (s3Config: AWS.S3, bucket: string, fileKey: string) => {
     try {
         const params = {
-            Bucket: process.env.REACT_APP_S3_BUCKET_NAME as string,
+            Bucket: bucket,
             Key: fileKey
         }
-        s3.getObject(params, (err, data) => {
+        s3Config.getObject(params, (err, data) => {
             if(err){
                 return [] as ComponentEntity[]
             }
