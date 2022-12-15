@@ -1,3 +1,4 @@
+import { ComponentEntity } from '../model';
 import {s3} from './s3Config';
 
 export const getFileS3 = async (fileKey: string) => {
@@ -8,12 +9,12 @@ export const getFileS3 = async (fileKey: string) => {
         }
         s3.getObject(params, (err, data) => {
             if(err){
-                return null
+                return [] as ComponentEntity[]
             }
-            return JSON.parse(data.Body?.toString() as string)
+            return JSON.parse(data.Body?.toString() as string) as ComponentEntity[]
         })
     } catch (exception) {
         console.log(exception);
-        return null
+        return [] as ComponentEntity[]
     }
 }

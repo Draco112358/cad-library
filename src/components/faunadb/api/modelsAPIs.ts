@@ -1,5 +1,4 @@
 import toast from "react-hot-toast";
-import { ComponentEntity } from "../../model/componentEntity/componentEntity";
 import faunadb from "faunadb"
 
 export type FaunaCadModel = {
