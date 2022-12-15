@@ -6,6 +6,8 @@ import { useDispatch } from "react-redux"
 import { ImportActionParamsObject, importCadModelFromDB } from "../../importFunctions/importFunctions"
 import { FaunaCadModel, getModelsByOwner } from "../api/modelsAPIs"
 import { useFaunaQuery } from "../useFaunaQuery"
+import {getFileS3} from "../../aws/modelsAPIs";
+import {ComponentEntity} from "../../model";
 
 export const ImportModelFromDBModal: FC<{ showModalLoad: Function, importActionParams: ImportActionParamsObject, importAction:(params: ImportActionParamsObject) => any }> = ({ showModalLoad, importActionParams, importAction }) => {
 
@@ -105,7 +107,8 @@ export const ImportModelFromDBModal: FC<{ showModalLoad: Function, importActionP
                                         () => { toast.error("You must select a model to load.") }
                                         :
                                         () => {
-                                            importActionParams.canvas.components = selectedModel.components
+                                            let components = getFileS3(selectedModel.components)
+                                            importActionParams.canvas.components = components as ComponentEntity[]
                                             showModalLoad(false)
                                             toast.success("Model successfully loaded")
                                             importCadModelFromDB(dispatch,importAction,importActionParams)

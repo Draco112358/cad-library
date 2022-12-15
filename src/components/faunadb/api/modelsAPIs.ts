@@ -4,7 +4,7 @@ import faunadb from "faunadb"
 
 export type FaunaCadModel = {
     name: string,
-    components: ComponentEntity[],
+    components: string,
     owner_id: string,
     owner: string,
     userSharingWith?: string[]
@@ -39,7 +39,7 @@ export const getModelsByOwner = async (faunaClient: faunadb.Client, faunaQuery: 
                 )
             )
         )
-            .catch((err) => console.error(
+            .catch((err: { name: any; message: any; errors: () => { description: any; }[]; }) => console.error(
                 'Error: [%s] %s: %s',
                 err.name,
                 err.message,
