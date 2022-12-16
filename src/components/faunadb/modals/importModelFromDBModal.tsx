@@ -9,7 +9,8 @@ import {
 } from "../../importFunctions/importFunctions";
 import { FaunaCadModel, getModelsByOwner } from "../api/modelsAPIs";
 import { useFaunaQuery } from "../useFaunaQuery";
-import { getFileS3 } from "../../aws/modelsAPIs";
+import { ComponentEntity } from "../../model/componentEntity/componentEntity";
+import AWS from "aws-sdk"
 
 export const ImportModelFromDBModal: FC<{
   showModalLoad: Function;
@@ -17,7 +18,13 @@ export const ImportModelFromDBModal: FC<{
   importAction: (params: ImportActionParamsObject) => any;
   s3Config: AWS.S3;
   bucket: string;
-}> = ({ showModalLoad, importActionParams, importAction, s3Config, bucket }) => {
+}> = ({
+  showModalLoad,
+  importActionParams,
+  importAction,
+  s3Config,
+  bucket,
+}) => {
   const [models, setModels] = useState<FaunaCadModel[]>([]);
   const [selectedModel, setSelectedModel] = useState<FaunaCadModel | undefined>(
     undefined
@@ -36,6 +43,34 @@ export const ImportModelFromDBModal: FC<{
           setLoadingMessage("No models to load form database.");
       });
   }, []);
+
+  const getFileS3 = async (
+    s3Config: AWS.S3,
+    bucket: string,
+    fileKey: string,
+    importActionParams: ImportActionParamsObject,
+    importAction: (params: ImportActionParamsObject) => any
+  ) => {
+    try {
+      const params = {
+        Bucket: bucket,
+        Key: fileKey,
+      };
+      s3Config.getObject(params, (err, data) => {
+        if (err) {
+          console.log(err);
+        }
+        let components = JSON.parse(
+          data.Body?.toString() as string
+        ) as ComponentEntity[];
+        importActionParams.canvas.components = components;
+        importCadModelFromDB(dispatch, importAction, importActionParams);
+      });
+    } catch (exception) {
+      console.log(exception);
+      return [] as ComponentEntity[];
+    }
+  };
 
   return (
     <Transition appear show={true} as={Fragment}>
@@ -126,21 +161,16 @@ export const ImportModelFromDBModal: FC<{
                             toast.error("You must select a model to load.");
                           }
                         : () => {
-                            getFileS3(s3Config,bucket,selectedModel.components).then(
-                              (components) => {
-                                if (components !== undefined) {
-                                  importActionParams.canvas.components =
-                                    components;
-                                }
-                              }
-                            );
-                            showModalLoad(false);
-                            toast.success("Model successfully loaded");
-                            importCadModelFromDB(
-                              dispatch,
-                              importAction,
-                              importActionParams
-                            );
+                            getFileS3(
+                              s3Config,
+                              bucket,
+                              selectedModel.components,
+                              importActionParams,
+                              importAction
+                            ).then(() => {
+                              showModalLoad(false);
+                              toast.success("Model successfully loaded");
+                            });
                           }
                     }
                   >
