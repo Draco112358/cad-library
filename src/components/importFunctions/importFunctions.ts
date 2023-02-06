@@ -18,8 +18,8 @@ export const importFromCadSTL = (STLFile: File, numberOfGeneratedKey: number, di
             transformationParams: TRANSF_PARAMS_DEFAULTS,
             previousTransformationParams: TRANSF_PARAMS_DEFAULTS,
             geometryAttributes: {
-                positionVertices: res.attributes.position.array as Float32Array,
-                normalVertices: res.attributes.normal.array as Float32Array,
+                positionVertices: Float32Array.from(res.attributes.position.array),
+                normalVertices:  Float32Array.from(res.attributes.normal.array),
                 uvVertices: undefined
             } as BufferGeometryAttributes,
             transparency: true,
