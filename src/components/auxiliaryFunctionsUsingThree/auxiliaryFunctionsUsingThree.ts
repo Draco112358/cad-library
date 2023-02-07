@@ -54,7 +54,13 @@ const geometryFrom = (entity: ComponentEntity) => {
                 sphereGeometryAttributes.heightSegments, sphereGeometryAttributes.phiStart, sphereGeometryAttributes.phiLength,
                 sphereGeometryAttributes.thetaStart, sphereGeometryAttributes.thetaLength)
         case "BUFFER":
-            let bufferGeometryAttributes = entity.geometryAttributes as BufferGeometryAttributes
+            let positionVertices = new Float32Array(Object.values((entity.geometryAttributes as any).positionVertices))
+            let normalVertices = new Float32Array(Object.values((entity.geometryAttributes as any).normalVertices))
+            let bufferGeometryAttributes: BufferGeometryAttributes = {
+            positionVertices: positionVertices,
+            normalVertices: normalVertices,
+            uvVertices: undefined
+          }
             let geometry = new THREE.BufferGeometry()
             geometry.setAttribute('position', new THREE.BufferAttribute(bufferGeometryAttributes.positionVertices, 3))
             geometry.setAttribute('normal', new THREE.BufferAttribute(bufferGeometryAttributes.normalVertices, 3))

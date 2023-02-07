@@ -82,15 +82,24 @@ export const FactoryShapes: FC<FactoryShapesProps> = ({ entity, color }) => {
         />
       );
     case "BUFFER":
-      let bufferGeometryAttributes =
-        entity.geometryAttributes as BufferGeometryAttributes;
+      let positionVertices = new Float32Array(Object.values((entity.geometryAttributes as any).positionVertices))
+      let normalVertices = new Float32Array(Object.values((entity.geometryAttributes as any).normalVertices))
+      let geometryAttributes: BufferGeometryAttributes = {
+            positionVertices: positionVertices,
+            normalVertices: normalVertices,
+            uvVertices: undefined
+          }
+      let bufferComponent = {
+            ...entity,
+            geometryAttributes: geometryAttributes
+          }
       return (
         <BufferComponent
-          positionVertices={bufferGeometryAttributes.positionVertices}
-          normalVertices={bufferGeometryAttributes.normalVertices}
-          color={getColor(color, entity, defaultColorShape)}
-          opacity={entity.opacity}
-          transparency={entity.transparency}
+          positionVertices={bufferComponent.geometryAttributes.positionVertices}
+          normalVertices={bufferComponent.geometryAttributes.normalVertices}
+          color={getColor(color, bufferComponent, defaultColorShape)}
+          opacity={bufferComponent.opacity as number}
+          transparency={bufferComponent.transparency as boolean}
         />
       );
     case "CYLINDER":
