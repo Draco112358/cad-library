@@ -42,5 +42,6 @@ export const importCadModelFromDB = (dispatch: Dispatch, action: (params: Import
 
 export type ImportActionParamsObject = {
     canvas: CanvasState,
-    id: string | undefined
+    id: string | undefined,
+    unit: string
 }

@@ -60,10 +60,11 @@ export const ImportModelFromDBModal: FC<{
         if (err) {
           console.log(err);
         }
-        let components = JSON.parse(
+        let model = JSON.parse(
           data.Body?.toString() as string
-        ) as ComponentEntity[];
-        importActionParams.canvas.components = components;
+        ) as { components:ComponentEntity[], unit: string };
+        importActionParams.canvas.components = model.components;
+        importActionParams.unit = model.unit;
         importCadModelFromDB(dispatch, importAction, importActionParams);
       });
     } catch (exception) {
