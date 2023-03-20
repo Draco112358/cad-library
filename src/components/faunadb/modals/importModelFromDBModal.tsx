@@ -4,8 +4,7 @@ import { FC, useEffect, useState, Fragment } from "react";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import {
-  ImportActionParamsObject,
-  importCadModelFromDB,
+  ImportActionParamsObject
 } from "../../importFunctions/importFunctions";
 import { FaunaCadModel, getModelsByOwner } from "../api/modelsAPIs";
 import { useFaunaQuery } from "../useFaunaQuery";
@@ -65,7 +64,7 @@ export const ImportModelFromDBModal: FC<{
         ) as { components:ComponentEntity[], unit: string };
         importActionParams.canvas.components = model.components;
         importActionParams.unit = model.unit;
-        importCadModelFromDB(dispatch, importAction, importActionParams);
+        importAction(importActionParams)
       });
     } catch (exception) {
       console.log(exception);
