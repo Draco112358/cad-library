@@ -39,5 +39,6 @@ export const importFromCadProject = (file: File, dispatch: Dispatch, action: (pa
 export type ImportActionParamsObject = {
     canvas: CanvasState,
     id: string | undefined,
-    unit: string
+    unit: string,
+    modelS3?: string
 }

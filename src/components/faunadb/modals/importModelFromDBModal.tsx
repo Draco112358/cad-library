@@ -64,6 +64,7 @@ export const ImportModelFromDBModal: FC<{
         ) as { components:ComponentEntity[], unit: string };
         importActionParams.canvas.components = model.components;
         importActionParams.unit = model.unit;
+        importActionParams.modelS3 = selectedModel?.components
         importAction(importActionParams)
       });
     } catch (exception) {
