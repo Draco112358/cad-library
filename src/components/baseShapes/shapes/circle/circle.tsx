@@ -22,7 +22,7 @@ export function getDefaultCircle(numberOfGeneratedKey: number, dispatch: Dispatc
         transformationParams: TRANSF_PARAMS_DEFAULTS,
         previousTransformationParams: TRANSF_PARAMS_DEFAULTS,
         geometryAttributes: {
-            radius: 1,
+            radius: 0.1,
             segments: 20,
             thetaStart: 0,
             thetaLength: Math.PI
