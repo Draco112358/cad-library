@@ -1,6 +1,6 @@
 {
   "name": "cad-library",
-  "version": "0.2.14",
+  "version": "0.3.0",
   "scripts": {
     "rollup": "rollup -c"
   },
@@ -23,23 +23,22 @@
     "typescript": "^4.1.2"
   },
   "peerDependencies": {
-    "@auth0/auth0-react": "^1.10.1",
-    "@headlessui/react": "^1.7.4",
-    "@react-three/fiber": "^7.0.27",
-    "@reduxjs/toolkit": "^1.7.1",
-    "@types/react": "^17.0.0",
+    "@auth0/auth0-react": "^2.2.4",
+    "@headlessui/react": "^1.7.18",
+    "@react-three/fiber": "^8.15.19",
+    "@reduxjs/toolkit": "^2.2.1",
+    "@types/react": "^18.2.65",
     "@types/three": "^0.132.2",
     "autoprefixer": "^10.4.13",
+    "aws-sdk": "^2.1275.0",
     "faunadb": "^4.6.0",
     "postcss": "^8.4.18",
-    "react": ">=16.11.0",
-    "react-bootstrap": "^2.4.0",
+    "react": "^18.2.0",
     "react-hot-toast": "^2.2.0",
     "react-redux": "^7.2.6",
     "redux-undo": "^1.0.1",
     "tailwindcss": "^3.2.1",
     "three": "^0.138.0",
-    "three-csg-ts": "^3.1.9",
-    "aws-sdk": "^2.1275.0"
+    "three-csg-ts": "^3.1.9"
   }
 }

@@ -28,9 +28,9 @@ export const UsersSlice = createSlice({
             state.userRole = undefined
         }
     },
-    extraReducers: {
-        //qui inseriamo i metodi : PENDING, FULLFILLED, REJECT utili per la gestione delle richieste asincrone
-    }
+    // extraReducers: {
+    //     //qui inseriamo i metodi : PENDING, FULLFILLED, REJECT utili per la gestione delle richieste asincrone
+    // }
 })
 
 

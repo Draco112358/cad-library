@@ -1,11 +1,12 @@
-import { FC, useRef } from "react";
+import { FC, ReactNode, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { ImportActionParamsObject, importFromCadProject } from "./importFunctions";
 
 interface ImportCadProjectButtonProps {
     importAction: (params: ImportActionParamsObject) => any,
     actionParams: ImportActionParamsObject
-    className?: string
+    className?: string,
+    children: ReactNode
 }
 
 export const ImportCadProjectButton: FC<ImportCadProjectButtonProps> = ({importAction, actionParams, className, children}) => {

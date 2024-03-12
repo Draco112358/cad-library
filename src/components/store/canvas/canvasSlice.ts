@@ -105,9 +105,9 @@ export const CanvasSlice = createSlice({
 
 
     },
-    extraReducers: {
-        //qui inseriamo i metodi : PENDING, FULLFILLED, REJECT utili per la gestione delle richieste asincrone
-    }
+    // extraReducers: {
+    //     //qui inseriamo i metodi : PENDING, FULLFILLED, REJECT utili per la gestione delle richieste asincrone
+    // }
 })
 
 
