@@ -2,11 +2,24 @@ import toast from "react-hot-toast";
 import faunadb from "faunadb"
 
 export type FaunaCadModel = {
+    id?: string,
     name: string,
     components: string,
     owner_id: string,
     owner: string,
     userSharingWith?: string[]
+}
+
+type FaunaModelDetails = {
+    id: string
+    details: FaunaCadModel
+}
+
+function faunaModelDetailsToFaunaCadModel(modelDetails: FaunaModelDetails) {
+    return {
+        id: modelDetails.id,
+        ...modelDetails.details
+    } as FaunaCadModel
 }
 
 export async function saveNewModel(faunaClient: faunadb.Client, faunaQuery: typeof faunadb.query, newModel: FaunaCadModel) {
@@ -34,7 +47,13 @@ export const getModelsByOwner = async (faunaClient: faunadb.Client, faunaQuery: 
             faunaQuery.Select("data",
                 faunaQuery.Map(
                     faunaQuery.Paginate(faunaQuery.Match(faunaQuery.Index("models_by_owner"), owner_id)),
-                    faunaQuery.Lambda("model", faunaQuery.Select("data", faunaQuery.Get(faunaQuery.Var("model"))))
+                    faunaQuery.Lambda("model",
+                        {
+                            id: faunaQuery.Select(
+                                ['ref', 'id'],
+                                faunaQuery.Get(faunaQuery.Var('model'))),
+                            details: faunaQuery.Select("data", faunaQuery.Get(faunaQuery.Var("model")))
+                        })
                 )
             )
         )
@@ -44,8 +63,8 @@ export const getModelsByOwner = async (faunaClient: faunadb.Client, faunaQuery: 
                 err.message,
                 err.errors()[0].description,
             ));
-        return response as FaunaCadModel[]
-    }catch (e) {
+        return (response as FaunaModelDetails[]).map(el => faunaModelDetailsToFaunaCadModel(el))
+    } catch (e) {
         console.log(e)
         return {} as [];
     }

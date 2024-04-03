@@ -1,6 +1,6 @@
 {
   "name": "cad-library",
-  "version": "0.3.1",
+  "version": "0.3.4",
   "scripts": {
     "rollup": "rollup -c"
   },
@@ -28,7 +28,7 @@
     "@react-three/fiber": "^8.15.19",
     "@reduxjs/toolkit": "^2.2.1",
     "@types/react": "^18.2.65",
-    "@types/three": "^0.132.2",
+    "@types/three": "^0.162.0",
     "autoprefixer": "^10.4.13",
     "aws-sdk": "^2.1275.0",
     "faunadb": "^4.6.0",
@@ -38,7 +38,7 @@
     "react-redux": "^7.2.6",
     "redux-undo": "^1.0.1",
     "tailwindcss": "^3.2.1",
-    "three": "^0.138.0",
+    "three": "^0.162.0",
     "three-csg-ts": "^3.1.9"
   }
 }
